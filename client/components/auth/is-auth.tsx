@@ -15,7 +15,7 @@ const isAuth = (Component: any) => {
   const IsAuth = (props: any) => {
     const pathname = usePathname()
 
-    const { data: user } = useQuery({
+    const { data: user, isFetched } = useQuery({
       queryKey: keys('/api/users/me', 'get').main(),
       queryFn: currentUser,
     })
