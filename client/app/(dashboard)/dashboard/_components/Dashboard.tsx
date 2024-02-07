@@ -1,10 +1,7 @@
-'use client';
-
-import TodoView from '@/app/_views/TodoView';
-import isAuth from '@/components/auth/is-auth';
+import TodoView from '@/app/_views/TodoView'
 
 const Dashboard = () => {
-  return <TodoView />;
-};
+  return <TodoView />
+}
 
-export default isAuth(Dashboard);
+export default Dashboard

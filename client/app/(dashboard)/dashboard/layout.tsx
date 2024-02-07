@@ -1,26 +1,15 @@
-'use client';
-
-import { currentUser } from '@/apis/auth/queries';
-import { keys } from '@/apis/query-keys';
-import { MainNav } from '@/components/main-nav';
-import { DashboardNav } from '@/components/nav';
-import { SiteFooter } from '@/components/site-footer';
-import { UserAccountNav } from '@/components/user-account-nav';
-import { dashboardConfig } from '@/config/dashboard';
-import { useQuery } from '@tanstack/react-query';
+'use client'
+import { MainNav } from '@/components/main-nav'
+import { DashboardNav } from '@/components/nav'
+import { SiteFooter } from '@/components/site-footer'
+import { UserAccountNav } from '@/components/user-account-nav'
+import { dashboardConfig } from '@/config/dashboard'
 
 interface DashboardLayoutProps {
-  children?: React.ReactNode;
+  children?: React.ReactNode
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
-  const { data: user, isLoading } = useQuery({
-    queryKey: keys('/api/users/me', 'get').main(),
-    queryFn: currentUser,
-  });
-
-  if (isLoading) return;
-
   return (
     <div className='flex min-h-screen flex-col space-y-6'>
       <header className='sticky top-0 z-40 border-b bg-background'>
@@ -39,5 +28,5 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       </div>
       <SiteFooter className='border-t' />
     </div>
-  );
+  )
 }

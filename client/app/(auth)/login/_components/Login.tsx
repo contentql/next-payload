@@ -1,12 +1,12 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
+import Link from 'next/link'
 
-import LoginView from '@/app/_views/LoginView';
-import isAuth from '@/components/auth/is-auth';
-import { Icons } from '@/components/icons';
-import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import LoginView from '@/app/_views/LoginView'
+import isAuth from '@/components/auth/is-auth'
+import { Icons } from '@/components/icons'
+import { buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
 const Login = () => {
   return (
@@ -16,8 +16,7 @@ const Login = () => {
         className={cn(
           buttonVariants({ variant: 'ghost' }),
           'absolute left-4 top-4 md:left-8 md:top-8',
-        )}
-      >
+        )}>
         <>
           <Icons.chevronLeft className='mr-2 h-4 w-4' />
           Back
@@ -27,7 +26,7 @@ const Login = () => {
         <LoginView />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default isAuth(Login);
+export default Login
