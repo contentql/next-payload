@@ -1,4 +1,4 @@
-export default function (/** @type {import('plop').NodePlopAPI} */ plop) {
+const plopConfiguration = (/** @type {import('plop').NodePlopAPI} */ plop) => {
   plop.setGenerator('dashboard', {
     description: 'generate a new dashboard component',
     prompts: [
@@ -11,9 +11,11 @@ export default function (/** @type {import('plop').NodePlopAPI} */ plop) {
     actions: [
       {
         type: 'add',
-        path: 'app/(dashboard)/dashboard/{{pascalCase name}}/page.tsx',
+        path: 'app/(dashboard)/dashboard/{{camelCase name}}/page.tsx',
         templateFile: 'templates/dashboardNav.template.hbs',
       },
     ],
   });
-}
+};
+
+export default plopConfiguration;

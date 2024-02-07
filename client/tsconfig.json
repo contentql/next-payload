@@ -22,6 +22,14 @@
       "@/_views/*": ["./app/_views/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "plopfile.mjs",
+    "plopfile.mjs",
+    "plopfile.js"
+  ],
   "exclude": ["node_modules"]
 }
