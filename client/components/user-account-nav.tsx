@@ -1,25 +1,25 @@
-'use client';
+'use client'
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
-import { logout } from '@/apis/auth';
-import { keys } from '@/apis/query-keys';
+import { logout } from '@/apis/auth'
+import { keys } from '@/apis/query-keys'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { UserAvatar } from '@/components/user-avatar';
-import { dashboardConfig } from '@/config/dashboard';
-import { currentUser } from '@/apis/auth/queries';
+} from '@/components/ui/dropdown-menu'
+import { UserAvatar } from '@/components/user-avatar'
+import { dashboardConfig } from '@/config/dashboard'
+import { currentUser } from '@/apis/auth/queries'
 
 export function UserAccountNav() {
-  const queryClient = useQueryClient();
-  const router = useRouter();
+  const queryClient = useQueryClient()
+  const router = useRouter()
 
   // const user: any = queryClient.getQueryData(
   //   keys('/api/users/me', 'get').main(),
@@ -28,7 +28,7 @@ export function UserAccountNav() {
   const { data: user, isLoading } = useQuery({
     queryKey: keys('/api/users/me', 'get').main(),
     queryFn: currentUser,
-  });
+  })
 
   const {
     isPending: isLogoutPending,
@@ -38,13 +38,13 @@ export function UserAccountNav() {
     mutationKey: keys('/api/users/logout', 'post').main(),
     mutationFn: () => logout(),
     onSuccess: async () => {
-      await queryClient.setQueryData(keys('/api/todos', 'get').main(), []);
+      await queryClient.setQueryData(keys('/api/todos', 'get').main(), [])
       await queryClient.invalidateQueries({
         queryKey: keys('/api/users/me', 'get').main(),
-      });
-      router.push('/login');
+      })
+      router.push('/login')
     },
-  });
+  })
 
   return (
     <DropdownMenu>
@@ -55,7 +55,7 @@ export function UserAccountNav() {
         <div className='flex items-center justify-start gap-2 p-2'>
           <div className='flex flex-col space-y-1 leading-none'>
             {user?.name && <p className='font-medium'>{user?.name}</p>}
-            {user.email && (
+            {user?.email && (
               <p className='w-[200px] truncate text-sm text-muted-foreground'>
                 {user.email}
               </p>
@@ -68,19 +68,18 @@ export function UserAccountNav() {
             <DropdownMenuItem asChild key={navItem.title}>
               <Link href={navItem.href!}>{navItem.title}</Link>
             </DropdownMenuItem>
-          );
+          )
         })}
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className='cursor-pointer'
           onSelect={(event: Event) => {
-            event.preventDefault();
-            logoutMutation();
-          }}
-        >
+            event.preventDefault()
+            logoutMutation()
+          }}>
           Sign out
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }
