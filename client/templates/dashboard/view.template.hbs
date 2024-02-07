@@ -3,8 +3,8 @@ DashboardShell } from '@/components/shell'; const SettingsView: React.FC = () =>
 { return (
 <DashboardShell>
   <DashboardHeader
-    heading='Settings'
-    text='Manage account and website settings.'
+    heading='{{pascalCase name}}'
+    text='Website {{camelCase name}}.'
   />
   <div className='grid gap-10'>
     {{name}}
