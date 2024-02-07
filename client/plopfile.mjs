@@ -16,6 +16,8 @@ const plopConfiguration = (/** @type {import('plop').NodePlopAPI} */ plop) => {
       },
     ],
   });
+
+  plop.setGenerator('test', {});
 };
 
 export default plopConfiguration;
