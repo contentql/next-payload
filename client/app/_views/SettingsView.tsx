@@ -12,7 +12,7 @@ const SettingsView: React.FC = () => {
   const queryClient = useQueryClient();
 
   const user = queryClient.getQueryData<User>(
-    keys('/api/users/me', 'get').main()
+    keys('/api/users/me', 'get').main(),
   );
 
   return (

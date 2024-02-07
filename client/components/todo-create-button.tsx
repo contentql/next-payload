@@ -82,7 +82,7 @@ export function TodoCreateButton({
               <Input
                 className='py-6'
                 type='text'
-                onChange={(e) => {
+                onChange={e => {
                   setInput(e.target.value);
                 }}
                 value={input}
@@ -97,7 +97,7 @@ export function TodoCreateButton({
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
-              onClick={async (event) => {
+              onClick={async event => {
                 event.preventDefault();
                 setIsCreateLoading(true);
                 addTodoMutation({ task: input });
@@ -107,7 +107,7 @@ export function TodoCreateButton({
                 {
                   'cursor-not-allowed opacity-60': isCreateLoading,
                 },
-                className
+                className,
               )}
               disabled={isCreateLoading}
             >

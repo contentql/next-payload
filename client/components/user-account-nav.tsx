@@ -63,7 +63,7 @@ export function UserAccountNav() {
           </div>
         </div>
         <DropdownMenuSeparator />
-        {dashboardConfig.userAccountNav.map((navItem) => {
+        {dashboardConfig.userAccountNav.map(navItem => {
           return (
             <DropdownMenuItem asChild key={navItem.title}>
               <Link href={navItem.href!}>{navItem.title}</Link>

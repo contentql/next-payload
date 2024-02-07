@@ -68,7 +68,7 @@ const LoginView = () => {
                 id='email'
                 placeholder='John@example.com'
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -78,7 +78,7 @@ const LoginView = () => {
                 id='password'
                 type='password'
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={e => setPassword(e.target.value)}
                 required
               />
             </div>
