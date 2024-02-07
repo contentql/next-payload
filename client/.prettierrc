@@ -3,7 +3,7 @@
   "bracketSpacing": true,
   "htmlWhitespaceSensitivity": "css",
   "insertPragma": false,
-  "jsxBracketSameLine": false,
+  "jsxBracketSameLine": true,
   "jsxSingleQuote": true,
   "printWidth": 80,
   "proseWrap": "always",
@@ -13,5 +13,6 @@
   "singleQuote": true,
   "tabWidth": 2,
   "trailingComma": "all",
-  "useTabs": false
+  "useTabs": false,
+  "plugins": ["prettier-plugin-tailwindcss"]
 }
