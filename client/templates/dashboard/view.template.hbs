@@ -1,0 +1,13 @@
+'use client'; import { DashboardHeader } from '@/components/header'; import {
+DashboardShell } from '@/components/shell'; const SettingsView: React.FC = () =>
+{ return (
+<DashboardShell>
+  <DashboardHeader
+    heading='Settings'
+    text='Manage account and website settings.'
+  />
+  <div className='grid gap-10'>
+    {{name}}
+  </div>
+</DashboardShell>
+); }; export default SettingsView;

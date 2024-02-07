@@ -1,0 +1,10 @@
+'use client';
+
+import {{pascalCase name}}View from '@/app/_views/{{pascalCase name}}View';
+import isAuth from '@/components/auth/is-auth';
+
+const {{pascalCase name}} = () => {
+  return <{{pascalCase name}}View />;
+};
+
+export default isAuth({{pascalCase name}});
