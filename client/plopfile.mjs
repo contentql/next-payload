@@ -10,6 +10,18 @@ const plopConfiguration = (/** @type {import('plop').NodePlopAPI} */ plop) => {
     ],
     actions: [
       {
+        type: 'append',
+        path: 'config/dashboard.ts',
+        pattern: /\/\/append_dashboard_nav/i,
+        templateFile: 'templates/dashboard/config.template.hbs',
+      },
+      {
+        type: 'append',
+        path: 'config/routes.ts',
+        pattern: /\/\/append_dashboard_routes/i,
+        templateFile: 'templates/dashboard/routes.template.hbs',
+      },
+      {
         type: 'add',
         path: 'app/_views/{{pascalCase name}}View.tsx',
         templateFile: 'templates/dashboard/view.template.hbs',
@@ -29,16 +41,10 @@ const plopConfiguration = (/** @type {import('plop').NodePlopAPI} */ plop) => {
         path: 'app/(dashboard)/dashboard/{{camelCase name}}/loading.tsx',
         templateFile: 'templates/dashboard/loading.template.hbs',
       },
-      {
-        type: 'append',
-        path: 'config/dashboard.ts',
-        pattern: /\/\/append_dashboard_nav/i,
-        templateFile: 'templates/dashboard/config.template.hbs',
-      },
     ],
-  });
+  })
 
-  plop.setGenerator('test', {});
-};
+  plop.setGenerator('test', {})
+}
 
-export default plopConfiguration;
+export default plopConfiguration
