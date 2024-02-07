@@ -1,6 +1,6 @@
 import http from '@/lib/axios';
 
-export const currUser = async () => {
+export const currentUser = async () => {
   try {
     const res = await http.get('/api/users/me');
 

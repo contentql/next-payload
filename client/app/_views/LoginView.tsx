@@ -33,10 +33,10 @@ const LoginView = () => {
   } = useMutation({
     mutationKey: keys('/api/users/login', 'post').main(),
     mutationFn: (userDetails: any) => login(userDetails),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({
-        queryKey: keys('/api/todos', 'get').main(),
-      });
+    onSuccess: () => {
+      // await queryClient.invalidateQueries({
+      //   queryKey: keys('/api/todos', 'get').main(),
+      // });
       router.push('/dashboard');
       setEmail('');
       setPassword('');

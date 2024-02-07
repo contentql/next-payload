@@ -1,6 +1,6 @@
 'use client';
 
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -15,10 +15,20 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { UserAvatar } from '@/components/user-avatar';
 import { dashboardConfig } from '@/config/dashboard';
+import { currentUser } from '@/apis/auth/queries';
 
-export function UserAccountNav({ user }: { user: any }) {
+export function UserAccountNav() {
   const queryClient = useQueryClient();
   const router = useRouter();
+
+  // const user: any = queryClient.getQueryData(
+  //   keys('/api/users/me', 'get').main(),
+  // );
+
+  const { data: user, isLoading } = useQuery({
+    queryKey: keys('/api/users/me', 'get').main(),
+    queryFn: currentUser,
+  });
 
   const {
     isPending: isLogoutPending,
@@ -39,15 +49,12 @@ export function UserAccountNav({ user }: { user: any }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <UserAvatar
-          user={{ name: user.name || null, image: user.image || null }}
-          className='h-8 w-8'
-        />
+        <UserAvatar user={user} className='h-8 w-8' />
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>
         <div className='flex items-center justify-start gap-2 p-2'>
           <div className='flex flex-col space-y-1 leading-none'>
-            {user.name && <p className='font-medium'>{user.name}</p>}
+            {user?.name && <p className='font-medium'>{user?.name}</p>}
             {user.email && (
               <p className='w-[200px] truncate text-sm text-muted-foreground'>
                 {user.email}

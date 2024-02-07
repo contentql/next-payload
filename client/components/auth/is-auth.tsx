@@ -1,11 +1,12 @@
 'use client';
 
-import { currUser } from '@/apis/auth/queries';
+import { currentUser } from '@/apis/auth/queries';
 import { keys } from '@/apis/query-keys';
 import { useQuery } from '@tanstack/react-query';
 import { usePathname, useRouter } from 'next/navigation';
 import LoggedUser from './LoginPageAcces';
 import RegisterPageAccess from './RegisterPageAccess';
+import { routesConfig } from '@/config/routes';
 
 const isAuth = (Component: any) => {
   const IsAuth = (props: any) => {
@@ -15,46 +16,21 @@ const isAuth = (Component: any) => {
 
     const { data: user, isLoading } = useQuery({
       queryKey: keys('/api/users/me', 'get').main(),
-      queryFn: currUser,
+      queryFn: currentUser,
     });
 
-    if (isLoading) return null;
+    if (isLoading) return 'loging';
 
-    if (pathname === '/login') {
-      if (user) {
-        return <LoggedUser />;
-      }
-
-      return <Component {...props} />;
+    if (pathname === '/login' && user) {
+      return <LoggedUser />;
     }
 
     if (pathname === '/register') {
       return <RegisterPageAccess />;
     }
 
-    if (pathname === '/dashboard') {
-      if (user) {
-        return <Component {...props} />;
-      }
-
+    if (routesConfig.dashboardProtectRoutes.includes(pathname) && !user)
       router.push('/login');
-    }
-
-    if (pathname === '/dashboard/billing') {
-      if (user) {
-        return <Component {...props} />;
-      }
-
-      router.push('/login');
-    }
-
-    if (pathname === '/dashboard/settings') {
-      if (user) {
-        return <Component {...props} />;
-      }
-
-      router.push('/login');
-    }
 
     return <Component {...props} />;
   };
