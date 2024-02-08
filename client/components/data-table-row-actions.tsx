@@ -18,7 +18,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
-import { labels } from '@/app/tasks/data/data'
+import { labels } from '@/app/(dashboard)/dashboard/tasks/data/data'
 
 interface Label {
   value: string

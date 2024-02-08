@@ -28,6 +28,11 @@ export const dashboardConfig: DashboardConfig = {
       href: '/dashboard/settings',
       icon: 'settings',
     },
+    {
+      title: 'Tasks',
+      href: '/dashboard/tasks',
+      icon: 'post',
+    },
     //append_dashboard_nav
   ],
   userAccountNav: [
