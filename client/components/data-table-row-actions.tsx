@@ -33,7 +33,7 @@ interface DataTableRowActionsProps<TData> {
   row: Row<TData>
 }
 
-export function DataTableRowActions<TData>({
+export function DataTableRowActions<TData extends Todo>({
   row,
 }: DataTableRowActionsProps<TData>) {
   const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false)
@@ -50,7 +50,9 @@ export function DataTableRowActions<TData>({
     variables: deleteTodoVariables,
     mutate: deleteTodoMutation,
   } = useMutation({
-    mutationKey: keys(`/api/todos/${row.id}`, 'delete').detail(row.id),
+    mutationKey: keys(`/api/todos/${row.original.id}`, 'delete').detail(
+      row.original.id,
+    ),
     mutationFn: (id: Todo['id']) => deleteTodo(id),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
@@ -75,7 +77,9 @@ export function DataTableRowActions<TData>({
     variables: editTodoVariables,
     mutate: editTodoMutation,
   } = useMutation({
-    mutationKey: keys(`/api/todos/${row.id}`, 'patch').detail(row.id),
+    mutationKey: keys(`/api/todos/${row.original.id}`, 'patch').detail(
+      row.original.id,
+    ),
     mutationFn: (obj: { id: Todo['id']; task: Todo['task'] }) =>
       editTodo(obj.id, { task: obj.task }),
     onSuccess: async () => {
@@ -112,7 +116,7 @@ export function DataTableRowActions<TData>({
           <DropdownMenuItem
             onClick={() => {
               setShowEditAlert(true)
-              setEditInput(row.task)
+              setEditInput(row.original.task!)
             }}>
             Edit
           </DropdownMenuItem>
@@ -137,7 +141,7 @@ export function DataTableRowActions<TData>({
               onClick={async event => {
                 event.preventDefault()
                 setIsDeleteLoading(true)
-                deleteTodoMutation(row.id)
+                deleteTodoMutation(row.original.id)
               }}
               className='bg-red-600 focus:ring-red-600'>
               {isDeleteLoading ? (
@@ -177,7 +181,7 @@ export function DataTableRowActions<TData>({
                 event.preventDefault()
                 setIsEditLoading(true)
                 editTodoMutation({
-                  id: row.id,
+                  id: row.original.id,
                   task: editInput,
                 })
               }}

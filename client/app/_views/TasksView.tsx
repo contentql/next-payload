@@ -16,19 +16,6 @@ const TasksView = () => {
     queryFn: getAllTodos,
   })
 
-  if (!tasks?.length) {
-    return (
-      <EmptyPlaceholder>
-        <EmptyPlaceholder.Icon name='post' />
-        <EmptyPlaceholder.Title>No tasks created</EmptyPlaceholder.Title>
-        <EmptyPlaceholder.Description>
-          You don&apos;t have any tasks yet. Start creating content.
-        </EmptyPlaceholder.Description>
-        <TodoCreateButton variant='outline' />
-      </EmptyPlaceholder>
-    )
-  }
-
   return (
     <DashboardShell>
       <DashboardHeader heading='Tasks' text='Create and manage your tasks.'>
@@ -36,7 +23,18 @@ const TasksView = () => {
       </DashboardHeader>
       <div className='grid gap-10'>
         <div className='h-full flex-1 flex-col space-y-8 overflow-hidden md:flex'>
-          <DataTable data={tasks} columns={columns} />
+          {tasks?.length ? (
+            <DataTable data={tasks} columns={columns} />
+          ) : (
+            <EmptyPlaceholder>
+              <EmptyPlaceholder.Icon name='post' />
+              <EmptyPlaceholder.Title>No tasks created</EmptyPlaceholder.Title>
+              <EmptyPlaceholder.Description>
+                You don&apos;t have any tasks yet. Start creating content.
+              </EmptyPlaceholder.Description>
+              <TodoCreateButton variant='outline' />
+            </EmptyPlaceholder>
+          )}
         </div>
       </div>
     </DashboardShell>
