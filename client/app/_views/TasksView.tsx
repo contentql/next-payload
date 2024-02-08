@@ -23,7 +23,7 @@ const TasksView = () => {
       </DashboardHeader>
       <div className='grid gap-10'>
         <div className='h-full flex-1 flex-col space-y-8 overflow-hidden md:flex'>
-          {tasks?.length ? (
+          {tasks?.length && !isPending ? (
             <DataTable data={tasks} columns={columns} />
           ) : (
             <EmptyPlaceholder>
