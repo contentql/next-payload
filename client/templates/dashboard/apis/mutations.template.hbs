@@ -1,0 +1,31 @@
+import http from '@/lib/axios';
+
+export const add{{pascalCase tableName}} = async (data: Object) => {
+  try {
+    const res = await http.post('/api/{{lowerCase tableName}}', data);
+
+    return res.data.doc;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const delete{{pascalCase tableName}} = async (id: string) => {
+  try {
+    const res = await http.delete(`/api/{{lowerCase tableName}}/${id}`);
+
+    return res.data.doc;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const edit{{pascalCase tableName}} = async (id: string, data: Object) => {
+  try {
+    const res = await http.put(`/api/{{lowerCase tableName}}/${id}`, data);
+
+    return res.data.doc;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -1,0 +1,11 @@
+import http from '@/lib/axios';
+
+export const getAll{{pascalCase tableName}} = async () => {
+  try {
+    const res = await http.get('/api/{{lowerCase tableName}}');
+
+    return res.data.docs;
+  } catch (error) {
+    console.log(error);
+  }
+};

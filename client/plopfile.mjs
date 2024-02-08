@@ -7,6 +7,11 @@ const plopConfiguration = (/** @type {import('plop').NodePlopAPI} */ plop) => {
         name: 'name',
         message: 'please insert the component name',
       },
+      {
+        type: 'input',
+        name: 'tableName',
+        message: 'please enter the table name: ',
+      },
     ],
     actions: [
       {
@@ -40,6 +45,21 @@ const plopConfiguration = (/** @type {import('plop').NodePlopAPI} */ plop) => {
         type: 'add',
         path: 'app/(dashboard)/dashboard/{{camelCase name}}/loading.tsx',
         templateFile: 'templates/dashboard/loading.template.hbs',
+      },
+      {
+        type: 'add',
+        path: 'apis/{{lowerCase name}}/queries.ts',
+        templateFile: 'templates/dashboard/apis/queries.template.hbs',
+      },
+      {
+        type: 'add',
+        path: 'apis/{{lowerCase name}}/mutations.ts',
+        templateFile: 'templates/dashboard/apis/mutations.template.hbs',
+      },
+      {
+        type: 'add',
+        path: 'apis/{{lowerCase name}}/index.ts',
+        templateFile: 'templates/dashboard/apis/index.template.hbs',
       },
     ],
   })
