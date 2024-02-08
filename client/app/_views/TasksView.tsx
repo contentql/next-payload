@@ -1,9 +1,13 @@
+'use client'
+
 import { columns } from '@/components/columns'
 import { DataTable } from '@/components/data-table'
+import { EmptyPlaceholder } from '@/components/empty-placeholder'
 import { DashboardHeader } from '@/components/header'
 import { DashboardShell } from '@/components/shell'
+import { TodoCreateButton } from '@/components/todo-create-button'
 
-const TasksView = async () => {
+const TasksView = () => {
   const tasks = [
     {
       id: 'TASK-8782',
@@ -85,11 +89,24 @@ const TasksView = async () => {
     },
   ]
 
+  if (!tasks?.length) {
+    return (
+      <EmptyPlaceholder>
+        <EmptyPlaceholder.Icon name='post' />
+        <EmptyPlaceholder.Title>No tasks created</EmptyPlaceholder.Title>
+        <EmptyPlaceholder.Description>
+          You don&apos;t have any tasks yet. Start creating content.
+        </EmptyPlaceholder.Description>
+        <TodoCreateButton variant='outline' />
+      </EmptyPlaceholder>
+    )
+  }
+
   return (
     <DashboardShell>
       <DashboardHeader heading='Tasks' text='Manage your tasks.' />
       <div className='grid gap-10'>
-        <div className='h-full flex-1 flex-col space-y-8 md:flex'>
+        <div className='h-full flex-1 flex-col space-y-8 overflow-hidden md:flex'>
           <DataTable data={tasks} columns={columns} />
         </div>
       </div>
