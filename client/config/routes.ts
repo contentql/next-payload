@@ -3,6 +3,7 @@ export const routesConfig = {
     '/dashboard',
     '/dashboard/billing',
     '/dashboard/settings',
+    //append_dashboard_routes
   ],
-  publicRoutes: [],
-};
+  publicRoutes: ['/', '/login', 'register'],
+}

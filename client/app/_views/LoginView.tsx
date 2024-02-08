@@ -1,35 +1,36 @@
-'use client';
+'use client'
 
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import Link from 'next/link';
-import { useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import Link from 'next/link'
+import { useState } from 'react'
 
-import { login } from '@/apis/auth';
-import { keys } from '@/apis/query-keys';
-import { Button } from '@/components/ui/button';
+import { login } from '@/apis/auth'
+import { keys } from '@/apis/query-keys'
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { useRouter } from 'next/navigation';
+} from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { useRouter } from 'next/navigation'
 
 const LoginView = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
 
-  const router = useRouter();
+  const router = useRouter()
 
   const {
     isPending: isLoginPending,
     variables: loginVariables,
     mutate: loginMutation,
+    isSuccess: loginSuccess,
   } = useMutation({
     mutationKey: keys('/api/users/login', 'post').main(),
     mutationFn: (userDetails: any) => login(userDetails),
@@ -37,19 +38,23 @@ const LoginView = () => {
       // await queryClient.invalidateQueries({
       //   queryKey: keys('/api/todos', 'get').main(),
       // });
-      router.push('/dashboard');
-      setEmail('');
-      setPassword('');
+
+      // if (!isLoginPending)
+
+      setEmail('')
+      setPassword('')
     },
-  });
+  })
+
+  loginSuccess && router.push('/dashboard')
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     loginMutation({
       email,
       password,
-    });
-  };
+    })
+  }
 
   return (
     <Card className='w-full max-w-sm'>
@@ -95,7 +100,7 @@ const LoginView = () => {
         </div>
       </CardContent>
     </Card>
-  );
-};
+  )
+}
 
-export default LoginView;
+export default LoginView
