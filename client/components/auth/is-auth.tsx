@@ -28,7 +28,9 @@ const isAuth = (Component: any) => {
       return <RegisterPageAccess />
     }
 
-    return <Component {...props} />
+    {
+      isFetched ? <Component {...props} /> : null
+    }
   }
 
   return IsAuth
