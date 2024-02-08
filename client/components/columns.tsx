@@ -4,18 +4,11 @@ import { ColumnDef } from '@tanstack/react-table'
 
 import { Checkbox } from '@/components/ui/checkbox'
 
-import {
-  labels,
-  priorities,
-  statuses,
-} from '@/app/(dashboard)/dashboard/tasks/data/data'
-import { Badge } from '@/components/ui/badge'
-
-import { Task } from '@/app/(dashboard)/dashboard/tasks/data/schema'
+import { Todo } from '@/types/payload-types'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { DataTableRowActions } from './data-table-row-actions'
 
-export const columns: ColumnDef<Task>[] = [
+export const columns: ColumnDef<Todo>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -43,50 +36,61 @@ export const columns: ColumnDef<Task>[] = [
   {
     accessorKey: 'id',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Task' />
+      <DataTableColumnHeader column={column} title='Id' />
     ),
-    cell: ({ row }) => <div className='w-[80px]'>{row.getValue('id')}</div>,
+    cell: ({ row }) => {
+      return (
+        <div className='flex space-x-2'>
+          <span className='max-w-[500px] truncate font-medium'>
+            {row.getValue('id')}
+          </span>
+        </div>
+      )
+    },
     enableSorting: false,
     enableHiding: false,
   },
   {
-    accessorKey: 'title',
+    accessorKey: 'task',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Title' />
+      <DataTableColumnHeader column={column} title='Task' />
     ),
     cell: ({ row }) => {
-      const label = labels.find(label => label.value === row.original.label)
-
       return (
         <div className='flex space-x-2'>
-          {label && <Badge variant='outline'>{label.label}</Badge>}
           <span className='max-w-[500px] truncate font-medium'>
-            {row.getValue('title')}
+            {row.getValue('task')}
           </span>
         </div>
       )
     },
   },
   {
-    accessorKey: 'status',
+    accessorKey: 'completed',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Status' />
+      <DataTableColumnHeader column={column} title='Completed' />
     ),
     cell: ({ row }) => {
-      const status = statuses.find(
-        status => status.value === row.getValue('status'),
-      )
-
-      if (!status) {
-        return null
-      }
-
       return (
-        <div className='flex w-[100px] items-center'>
-          {status.icon && (
-            <status.icon className='mr-2 h-4 w-4 text-muted-foreground' />
-          )}
-          <span>{status.label}</span>
+        <div className='flex space-x-2'>
+          <span className='max-w-[500px] truncate font-medium'>
+            {row.getValue('completed') ? 'true' : 'false'}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: 'createdAt',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Created At' />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className='flex space-x-2'>
+          <span className='max-w-[500px] truncate font-medium'>
+            {row.getValue('createdAt')}
+          </span>
         </div>
       )
     },
@@ -95,25 +99,16 @@ export const columns: ColumnDef<Task>[] = [
     },
   },
   {
-    accessorKey: 'priority',
+    accessorKey: 'updatedAt',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Priority' />
+      <DataTableColumnHeader column={column} title='Updated At' />
     ),
     cell: ({ row }) => {
-      const priority = priorities.find(
-        priority => priority.value === row.getValue('priority'),
-      )
-
-      if (!priority) {
-        return null
-      }
-
       return (
-        <div className='flex items-center'>
-          {priority.icon && (
-            <priority.icon className='mr-2 h-4 w-4 text-muted-foreground' />
-          )}
-          <span>{priority.label}</span>
+        <div className='flex space-x-2'>
+          <span className='max-w-[500px] truncate font-medium'>
+            {row.getValue('updatedAt')}
+          </span>
         </div>
       )
     },
