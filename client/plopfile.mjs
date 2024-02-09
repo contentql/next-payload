@@ -5,12 +5,15 @@ const plopConfiguration = (/** @type {import('plop').NodePlopAPI} */ plop) => {
       {
         type: 'input',
         name: 'name',
-        message: 'please insert the component name',
+        message: 'please enter the component name: ',
       },
       {
         type: 'input',
         name: 'tableName',
         message: 'please enter the table name: ',
+      },
+      {
+        type: 'list',
       },
     ],
     actions: [
@@ -48,18 +51,69 @@ const plopConfiguration = (/** @type {import('plop').NodePlopAPI} */ plop) => {
       },
       {
         type: 'add',
-        path: 'apis/{{lowerCase name}}/queries.ts',
+        path: 'apis/{{lowerCase tableName}}/queries.ts',
         templateFile: 'templates/dashboard/apis/queries.template.hbs',
       },
       {
         type: 'add',
-        path: 'apis/{{lowerCase name}}/mutations.ts',
+        path: 'apis/{{lowerCase tableName}}/mutations.ts',
         templateFile: 'templates/dashboard/apis/mutations.template.hbs',
       },
       {
         type: 'add',
-        path: 'apis/{{lowerCase name}}/index.ts',
+        path: 'apis/{{lowerCase tableName}}/index.ts',
         templateFile: 'templates/dashboard/apis/index.template.hbs',
+      },
+      {
+        type: 'add',
+        path: 'components/{{lowerCase tableName}}/data-table.tsx',
+        templateFile: 'templates/dashboard/table/data-table.template.hbs',
+      },
+      {
+        type: 'add',
+        path: 'components/{{lowerCase tableName}}/data-table-view-options.tsx',
+        templateFile:
+          'templates/dashboard/table/data-table-view-options.template.hbs',
+      },
+      {
+        type: 'add',
+        path: 'components/{{lowerCase tableName}}/data-table-toolbar.tsx',
+        templateFile:
+          'templates/dashboard/table/data-table-toolbar.template.hbs',
+      },
+      {
+        type: 'add',
+        path: 'components/{{lowerCase tableName}}/data-table-row-actions.tsx',
+        templateFile:
+          'templates/dashboard/table/data-table-row-actions.template.hbs',
+      },
+      {
+        type: 'add',
+        path: 'components/{{lowerCase tableName}}/data-table-pagination.tsx',
+        templateFile:
+          'templates/dashboard/table/data-table-pagination.template.hbs',
+      },
+      {
+        type: 'add',
+        path: 'components/{{lowerCase tableName}}/data-table-faceted-filter.tsx',
+        templateFile:
+          'templates/dashboard/table/data-table-faceted-filter.template.hbs',
+      },
+      {
+        type: 'add',
+        path: 'components/{{lowerCase tableName}}/data-table-column-header.tsx',
+        templateFile:
+          'templates/dashboard/table/data-table-column-header.template.hbs',
+      },
+      {
+        type: 'add',
+        path: 'components/{{lowerCase tableName}}/columns.tsx',
+        templateFile: 'templates/dashboard/table/columns.template.hbs',
+      },
+      {
+        type: 'add',
+        path: 'components/{{lowerCase tableName}}/columns-list.tsx',
+        templateFile: 'templates/dashboard/table/columns-list.template.hbs',
       },
     ],
   })
