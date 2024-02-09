@@ -13,7 +13,9 @@ const plopConfiguration = (/** @type {import('plop').NodePlopAPI} */ plop) => {
         message: 'please enter the table name: ',
       },
       {
-        type: 'list',
+        type: 'input',
+        name: 'arrayData',
+        message: 'example: [{accessorKey: "orders", title: "Orders"}]',
       },
     ],
     actions: [
