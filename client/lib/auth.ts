@@ -1,10 +1,12 @@
-'use server';
+'use server'
 
-import { cookies } from 'next/headers';
+import { cookies } from 'next/headers'
 
 export async function isAuthenticated() {
-    const cookiesList = cookies()
-    const hasCookie = cookiesList.has('payload-token');
+  const cookiesList = cookies()
+  console.log('cookies', cookiesList)
+  console.log('cookies_get_all', cookiesList.getAll())
+  const hasCookie = cookiesList.has('payload-token')
 
-    return hasCookie;
+  return hasCookie
 }
