@@ -47,9 +47,6 @@ export const columns: ColumnDef<Todo>[] = [
         </div>
       )
     },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
-    },
   },
   {
     accessorKey: 'task',
@@ -64,9 +61,6 @@ export const columns: ColumnDef<Todo>[] = [
           </span>
         </div>
       )
-    },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
     },
   },
   {
@@ -83,9 +77,6 @@ export const columns: ColumnDef<Todo>[] = [
         </div>
       )
     },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
-    },
   },
   {
     accessorKey: 'createdAt',
@@ -101,9 +92,6 @@ export const columns: ColumnDef<Todo>[] = [
         </div>
       )
     },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
-    },
   },
   {
     accessorKey: 'updatedAt',
@@ -118,9 +106,6 @@ export const columns: ColumnDef<Todo>[] = [
           </span>
         </div>
       )
-    },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
     },
   },
   {

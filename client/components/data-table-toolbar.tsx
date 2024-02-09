@@ -27,13 +27,6 @@ export function DataTableToolbar<TData>({
           }
           className='h-8 w-[150px] lg:w-[250px]'
         />
-        {/* {table.getColumn('status') && (
-          <DataTableFacetedFilter
-            column={table.getColumn('status')}
-            title='Status'
-            options={statuses}
-          />
-        )} */}
         {isFiltered && (
           <Button
             variant='ghost'
