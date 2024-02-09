@@ -15,6 +15,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import * as React from 'react'
+import { useLocalStorage } from 'react-haiku'
 
 import {
   Table,
@@ -33,13 +34,17 @@ interface DataTableProps<TData, TValue> {
   data: TData[]
 }
 
+interface ExtendedVisibilityState extends VisibilityState {
+  [key: string]: any
+}
+
 export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
+    useLocalStorage<ExtendedVisibilityState>('columnVisibility', {})
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
   )
