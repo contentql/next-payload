@@ -7,7 +7,7 @@ import { DashboardHeader } from '@/components/header'
 import { DashboardShell } from '@/components/shell'
 import { columns } from '@/components/tasks/columns'
 import { DataTable } from '@/components/tasks/data-table'
-import { TodoCreateButton } from '@/components/todo-create-button'
+import { TaskCreateButton } from '@/components/tasks/task-create-button'
 import { useQuery } from '@tanstack/react-query'
 
 const TasksView = () => {
@@ -19,7 +19,7 @@ const TasksView = () => {
   return (
     <DashboardShell>
       <DashboardHeader heading='Tasks' text='Create and manage your tasks.'>
-        <TodoCreateButton />
+        <TaskCreateButton />
       </DashboardHeader>
       <div className='grid gap-10'>
         <div className='h-full flex-1 flex-col space-y-8 overflow-hidden md:flex'>
@@ -32,7 +32,7 @@ const TasksView = () => {
               <EmptyPlaceholder.Description>
                 You don&apos;t have any tasks yet. Start creating content.
               </EmptyPlaceholder.Description>
-              <TodoCreateButton variant='outline' />
+              <TaskCreateButton variant='outline' />
             </EmptyPlaceholder>
           )}
         </div>

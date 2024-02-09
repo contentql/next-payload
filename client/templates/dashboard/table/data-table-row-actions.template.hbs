@@ -4,7 +4,7 @@ import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { Row } from '@tanstack/react-table'
 
 import { keys } from '@/apis/query-keys'
-import { delete{{pascalCase tableName}}, edit{{pascalCase tableName}} } from '@/apis/{{lowerCase tableName}}/mutations'
+import { delete{{pascalCase tableName}}, edit{{pascalCase tableName}} } from '@/apis/{{dashCase tableName}}'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -46,17 +46,17 @@ export function DataTableRowActions<TData extends {{pascalCase tableName}}>({
   const queryClient = useQueryClient()
 
   const {
-    isPending: isDeleteTodoPending,
-    variables: deleteTodoVariables,
-    mutate: deleteTodoMutation,
+    isPending: isDelete{{pascalCase tableName}}Pending,
+    variables: delete{{pascalCase tableName}}Variables,
+    mutate: delete{{pascalCase tableName}}Mutation,
   } = useMutation({
-    mutationKey: keys(`/api/todos/${row.original.id}`, 'delete').detail(
+    mutationKey: keys(`/api/{{dashCase tableName}}/${row.original.id}`, 'delete').detail(
       row.original.id,
     ),
-    mutationFn: (id: {{pascalCase tableName}}['id']) => deleteTodo(id),
+    mutationFn: (id: {{pascalCase tableName}}['id']) => delete{{pascalCase tableName}}(id),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: keys('/api/todos', 'get').main(),
+        queryKey: keys('/api/{{dashCase tableName}}', 'get').main(),
       })
     },
     onError: async () => {
@@ -73,18 +73,18 @@ export function DataTableRowActions<TData extends {{pascalCase tableName}}>({
   })
 
   const {
-    isPending: isEditTodoPending,
-    variables: editTodoVariables,
-    mutate: editTodoMutation,
+    isPending: isEdit{{pascalCase tableName}}Pending,
+    variables: edit{{pascalCase tableName}}Variables,
+    mutate: edit{{pascalCase tableName}}Mutation,
   } = useMutation({
-    mutationKey: keys(`/api/todos/${row.original.id}`, 'patch').detail(
+    mutationKey: keys(`/api/{{dashCase tableName}}/${row.original.id}`, 'patch').detail(
       row.original.id,
     ),
     mutationFn: (obj: Partial<{{pascalCase tableName}}>) =>
-      editTodo(obj.id as string, { task: obj.task }),
+      edit{{pascalCase tableName}}(obj.id as string, { task: obj.task }),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: keys('/api/todos', 'get').main(),
+        queryKey: keys('/api/{{dashCase tableName}}', 'get').main(),
       })
     },
     onError: async () => {
@@ -141,7 +141,7 @@ export function DataTableRowActions<TData extends {{pascalCase tableName}}>({
               onClick={async event => {
                 event.preventDefault()
                 setIsDeleteLoading(true)
-                deleteTodoMutation(row.original.id)
+                delete{{pascalCase tableName}}Mutation(row.original.id)
               }}
               className='bg-red-600 focus:ring-red-600'>
               {isDeleteLoading ? (
@@ -180,7 +180,7 @@ export function DataTableRowActions<TData extends {{pascalCase tableName}}>({
               onClick={async event => {
                 event.preventDefault()
                 setIsEditLoading(true)
-                editTodoMutation({
+                edit{{pascalCase tableName}}Mutation({
                   id: row.original.id,
                   task: editInput,
                 })

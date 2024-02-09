@@ -1,0 +1,124 @@
+'use client'
+
+import { useRouter } from 'next/navigation'
+import * as React from 'react'
+
+import { keys } from '@/apis/query-keys'
+import { add{{pascalCase tableName}} } from '@/apis/{{dashCase tableName}}'
+import { Icons } from '@/components/icons'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
+import { ButtonProps, buttonVariants } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { toast } from '@/components/ui/use-toast'
+import { cn } from '@/lib/utils'
+import { {{pascalCase tableName}} } from '@/types/payload-types'
+import { AlertDialogDescription } from '@radix-ui/react-alert-dialog'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+
+interface {{pascalCase tableName}}CreateButtonProps extends ButtonProps {}
+
+export function {{pascalCase tableName}}CreateButton({
+  className,
+  variant,
+  ...props
+}: {{pascalCase tableName}}CreateButtonProps) {
+  const router = useRouter()
+  const [isCreateLoading, setIsCreateLoading] = React.useState<boolean>(false)
+
+  const [input, setInput] = React.useState('')
+  const [showCreateAlert, setShowCreateAlert] = React.useState(false)
+
+  const queryClient = useQueryClient()
+
+  const {
+    isPending: isAdd{{pascalCase tableName}}Pending,
+    variables: add{{pascalCase tableName}}Variables,
+    mutate: add{{pascalCase tableName}}Mutation,
+  } = useMutation({
+    mutationKey: keys('/api/{{dashCase tableName}}', 'post').detail(input),
+    mutationFn: ({{camelCase tableName}}: { task: {{pascalCase tableName}}['{{camelCase tableName}}'] }) => add{{pascalCase tableName}}({{camelCase tableName}}),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: keys('/api/{{dashCase tableName}}', 'get').main(),
+      })
+    },
+    onError: async () => {
+      toast({
+        title: 'Something went wrong.',
+        description: 'Your {{lowerCase tableName}} was not created. Please try again.',
+        variant: 'destructive',
+      })
+    },
+    onSettled: async () => {
+      setInput('')
+      setIsCreateLoading(false)
+      setShowCreateAlert(false)
+    },
+  })
+
+  return (
+    <>
+      <button
+        onClick={() => setShowCreateAlert(true)}
+        className={cn(buttonVariants({ variant }), className)}
+        {...props}>
+        <Icons.add className='mr-2 h-4 w-4' />
+        New {{lowerCase tableName}}
+      </button>
+      <AlertDialog open={showCreateAlert} onOpenChange={setShowCreateAlert}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              Add a New {{titleCase tableName}}
+              <Input
+                className='py-6'
+                type='text'
+                onChange={e => {
+                  setInput(e.target.value)
+                }}
+                value={input}
+                placeholder='Enter {{titleCase tableName}}'
+                required={true}
+              />
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              Enter your new {{titleCase tableName}} here. Click create when done.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={async event => {
+                event.preventDefault()
+                setIsCreateLoading(true)
+                add{{pascalCase tableName}}Mutation({ task: input })
+              }}
+              className={cn(
+                buttonVariants({ variant }),
+                {
+                  'cursor-not-allowed opacity-60': isCreateLoading,
+                },
+                className,
+              )}
+              disabled={isCreateLoading}>
+              {isCreateLoading ? (
+                <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />
+              ) : (
+                <Icons.add className='mr-2 h-4 w-4' />
+              )}
+              <span>Create</span>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
+  )
+}
