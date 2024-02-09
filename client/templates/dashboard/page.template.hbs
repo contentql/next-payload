@@ -1,0 +1,12 @@
+import { Metadata } from 'next'
+
+import {{pascalCase tableName}} from '@/components/{{dashCase tableName}}/{{dashCase tableName}}'
+
+export const metadata: Metadata = {
+  title: '{{sentenceCase tableName}}',
+  description: 'Create and manage your {{lowerCase tableName}}.',
+}
+
+export default function {{pascalCase tableName}}Page() {
+  return <{{pascalCase tableName}} />
+}

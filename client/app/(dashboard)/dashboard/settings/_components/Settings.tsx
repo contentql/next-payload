@@ -1,10 +1,7 @@
-'use client';
-
-import SettingsView from '@/app/_views/SettingsView';
-import isAuth from '@/components/auth/is-auth';
+import SettingsView from '@/app/_views/SettingsView'
 
 const Settings = () => {
-  return <SettingsView />;
-};
+  return <SettingsView />
+}
 
-export default isAuth(Settings);
+export default Settings

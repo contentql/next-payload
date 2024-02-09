@@ -1,10 +1,7 @@
-'use client';
-
-import BillingView from '@/app/_views/BillingView';
-import isAuth from '@/components/auth/is-auth';
+import BillingView from '@/app/_views/BillingView'
 
 const Billing = () => {
-  return <BillingView />;
-};
+  return <BillingView />
+}
 
-export default isAuth(Billing);
+export default Billing

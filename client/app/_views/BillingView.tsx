@@ -1,12 +1,12 @@
-import { redirect } from 'next/navigation';
+import { redirect } from 'next/navigation'
 
-import { BillingForm } from '@/components/billing-form';
-import { DashboardHeader } from '@/components/header';
-import { Icons } from '@/components/icons';
-import { DashboardShell } from '@/components/shell';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { stripe } from '@/lib/stripe';
-import { getUserSubscriptionPlan } from '@/lib/subscription';
+import { BillingForm } from '@/components/billing-form'
+import { DashboardHeader } from '@/components/header'
+import { Icons } from '@/components/icons'
+import { DashboardShell } from '@/components/shell'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { stripe } from '@/lib/stripe'
+import { getUserSubscriptionPlan } from '@/lib/subscription'
 
 const BillingView = async () => {
   const user = {
@@ -14,21 +14,21 @@ const BillingView = async () => {
     name: 'manikanta',
     image: './vercel.svg',
     email: 'manikanta.potnuru@resonateaes.com',
-  };
-
-  if (!user) {
-    redirect('/login');
   }
 
-  const subscriptionPlan = await getUserSubscriptionPlan(user.id);
+  if (!user) {
+    redirect('/login')
+  }
+
+  const subscriptionPlan = await getUserSubscriptionPlan(user.id)
 
   // If user has a pro plan, check cancel status on Stripe.
-  let isCanceled = false;
+  let isCanceled = false
   if (subscriptionPlan.isPro && subscriptionPlan.stripeSubscriptionId) {
     const stripePlan = await stripe.subscriptions.retrieve(
       subscriptionPlan.stripeSubscriptionId,
-    );
-    isCanceled = stripePlan.cancel_at_period_end;
+    )
+    isCanceled = stripePlan.cancel_at_period_end
   }
 
   return (
@@ -48,8 +48,7 @@ const BillingView = async () => {
               href='https://stripe.com/docs/testing#cards'
               target='_blank'
               rel='noreferrer'
-              className='font-medium underline underline-offset-8'
-            >
+              className='font-medium underline underline-offset-8'>
               Stripe docs
             </a>
             .
@@ -63,7 +62,7 @@ const BillingView = async () => {
         />
       </div>
     </DashboardShell>
-  );
-};
+  )
+}
 
-export default BillingView;
+export default BillingView

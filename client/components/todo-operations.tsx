@@ -150,7 +150,7 @@ export function TodoOperations({ todo }: { todo: any }) {
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
-              onClick={async (event) => {
+              onClick={async event => {
                 event.preventDefault();
                 setIsDeleteLoading(true);
                 deleteTodoMutation(todo.id);
@@ -175,7 +175,7 @@ export function TodoOperations({ todo }: { todo: any }) {
               <Input
                 className='py-6'
                 type='text'
-                onChange={(e) => {
+                onChange={e => {
                   setEditInput(e.target.value);
                 }}
                 value={editInput}
@@ -190,7 +190,7 @@ export function TodoOperations({ todo }: { todo: any }) {
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
-              onClick={async (event) => {
+              onClick={async event => {
                 event.preventDefault();
                 setIsEditLoading(true);
                 editTodoMutation({

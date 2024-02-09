@@ -1,11 +1,11 @@
-'use client';
+'use client'
 
-import { useRouter } from 'next/navigation';
-import * as React from 'react';
+import { useRouter } from 'next/navigation'
+import * as React from 'react'
 
-import { keys } from '@/apis/query-keys';
-import { addTodo } from '@/apis/todos';
-import { Icons } from '@/components/icons';
+import { keys } from '@/apis/query-keys'
+import { addTodo } from '@/apis/todos'
+import { Icons } from '@/components/icons'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,14 +14,14 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
-import { ButtonProps, buttonVariants } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { toast } from '@/components/ui/use-toast';
-import { cn } from '@/lib/utils';
-import { Todo } from '@/types/payload-types';
-import { AlertDialogDescription } from '@radix-ui/react-alert-dialog';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+} from '@/components/ui/alert-dialog'
+import { ButtonProps, buttonVariants } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { toast } from '@/components/ui/use-toast'
+import { cn } from '@/lib/utils'
+import { Todo } from '@/types/payload-types'
+import { AlertDialogDescription } from '@radix-ui/react-alert-dialog'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 interface TodoCreateButtonProps extends ButtonProps {}
 
@@ -30,13 +30,13 @@ export function TodoCreateButton({
   variant,
   ...props
 }: TodoCreateButtonProps) {
-  const router = useRouter();
-  const [isCreateLoading, setIsCreateLoading] = React.useState<boolean>(false);
+  const router = useRouter()
+  const [isCreateLoading, setIsCreateLoading] = React.useState<boolean>(false)
 
-  const [input, setInput] = React.useState('');
-  const [showCreateAlert, setShowCreateAlert] = React.useState(false);
+  const [input, setInput] = React.useState('')
+  const [showCreateAlert, setShowCreateAlert] = React.useState(false)
 
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
 
   const {
     isPending: isAddTodoPending,
@@ -48,31 +48,30 @@ export function TodoCreateButton({
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: keys('/api/todos', 'get').main(),
-      });
+      })
     },
     onError: async () => {
       toast({
         title: 'Something went wrong.',
         description: 'Your todo was not created. Please try again.',
         variant: 'destructive',
-      });
+      })
     },
     onSettled: async () => {
-      setInput('');
-      setIsCreateLoading(false);
-      setShowCreateAlert(false);
+      setInput('')
+      setIsCreateLoading(false)
+      setShowCreateAlert(false)
     },
-  });
+  })
 
   return (
     <>
       <button
         onClick={() => setShowCreateAlert(true)}
         className={cn(buttonVariants({ variant }), className)}
-        {...props}
-      >
+        {...props}>
         <Icons.add className='mr-2 h-4 w-4' />
-        New todo
+        New task
       </button>
       <AlertDialog open={showCreateAlert} onOpenChange={setShowCreateAlert}>
         <AlertDialogContent>
@@ -82,8 +81,8 @@ export function TodoCreateButton({
               <Input
                 className='py-6'
                 type='text'
-                onChange={(e) => {
-                  setInput(e.target.value);
+                onChange={e => {
+                  setInput(e.target.value)
                 }}
                 value={input}
                 placeholder='Enter Todo'
@@ -97,20 +96,19 @@ export function TodoCreateButton({
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
-              onClick={async (event) => {
-                event.preventDefault();
-                setIsCreateLoading(true);
-                addTodoMutation({ task: input });
+              onClick={async event => {
+                event.preventDefault()
+                setIsCreateLoading(true)
+                addTodoMutation({ task: input })
               }}
               className={cn(
                 buttonVariants({ variant }),
                 {
                   'cursor-not-allowed opacity-60': isCreateLoading,
                 },
-                className
+                className,
               )}
-              disabled={isCreateLoading}
-            >
+              disabled={isCreateLoading}>
               {isCreateLoading ? (
                 <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />
               ) : (
@@ -122,5 +120,5 @@ export function TodoCreateButton({
         </AlertDialogContent>
       </AlertDialog>
     </>
-  );
+  )
 }
