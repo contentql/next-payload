@@ -27,7 +27,7 @@ export const columns: ColumnDef<Todo>[] = [
         checked={row.getIsSelected()}
         onCheckedChange={value => row.toggleSelected(!!value)}
         aria-label='Select row'
-        className='translate-y-[2px]'
+        className='mr-2 translate-y-[2px]'
       />
     ),
     enableSorting: false,
@@ -47,8 +47,9 @@ export const columns: ColumnDef<Todo>[] = [
         </div>
       )
     },
-    enableSorting: false,
-    enableHiding: false,
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
+    },
   },
   {
     accessorKey: 'task',
@@ -64,6 +65,9 @@ export const columns: ColumnDef<Todo>[] = [
         </div>
       )
     },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
+    },
   },
   {
     accessorKey: 'completed',
@@ -78,6 +82,9 @@ export const columns: ColumnDef<Todo>[] = [
           </span>
         </div>
       )
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
     },
   },
   {
