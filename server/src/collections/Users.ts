@@ -20,7 +20,12 @@ const Users: CollectionConfig = {
   //     },
   //   },
   // },
-  auth: true,
+  auth: {
+    cookies: {
+      secure: true,
+    },
+  },
+  // auth: true,
   admin: {
     useAsTitle: 'email',
   },
