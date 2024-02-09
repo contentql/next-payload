@@ -74,6 +74,11 @@ const plopConfiguration = (/** @type {import('plop').NodePlopAPI} */ plop) => {
       },
       {
         type: 'add',
+        path: 'components/{{dashCase tableName}}/{{dashCase tableName}}-create-button.tsx',
+        templateFile: 'templates/dashboard/table/create-button.template.hbs',
+      },
+      {
+        type: 'add',
         path: 'components/{{dashCase tableName}}/data-table-toolbar.tsx',
         templateFile:
           'templates/dashboard/table/data-table-toolbar.template.hbs',
