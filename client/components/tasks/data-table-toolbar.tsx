@@ -37,6 +37,13 @@ export function DataTableToolbar<TData>({
           </Button>
         )}
       </div>
+      <Button
+        variant='outline'
+        size='sm'
+        className='ml-auto mr-2 hidden h-8 lg:flex'
+        onClick={() => table.toggleAllColumnsVisible()}>
+        Show all
+      </Button>
       <DataTableViewOptions table={table} />
     </div>
   )

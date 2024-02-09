@@ -4,7 +4,7 @@ import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { Row } from '@tanstack/react-table'
 
 import { keys } from '@/apis/query-keys'
-import { deleteTodo, editTodo } from '@/apis/todos/mutations'
+import { delete{{pascalCase tableName}}, edit{{pascalCase tableName}} } from '@/apis/{{lowerCase tableName}}/mutations'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -166,7 +166,7 @@ export function DataTableRowActions<TData extends {{pascalCase tableName}}>({
                   setEditInput(e.target.value)
                 }}
                 value={editInput}
-                placeholder='Enter new todo'
+                placeholder='Enter new {{lowerCase tableName}}'
                 required={true}
               />
             </AlertDialogTitle>

@@ -1,12 +1,14 @@
-'use client'
-
-import { ColumnDef } from '@tanstack/react-table'
-
 import { Checkbox } from '@/components/ui/checkbox'
-
 import { Todo } from '@/types/payload-types'
+import { ColumnDef } from '@tanstack/react-table'
+import { columnsList } from './columns-list'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { DataTableRowActions } from './data-table-row-actions'
+
+type ColumnListItem = {
+  accessorKey: string
+  title: string
+}
 
 export const columns: ColumnDef<Todo>[] = [
   {
@@ -33,82 +35,25 @@ export const columns: ColumnDef<Todo>[] = [
     enableSorting: false,
     enableHiding: false,
   },
+  ...(columnsList.map(({ accessorKey, title }: ColumnListItem) => {
+    return {
+      accessorKey: accessorKey,
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title={title} />
+      ),
+      cell: ({ row }) => {
+        return (
+          <div className='flex space-x-2'>
+            <span className='max-w-[500px] truncate font-medium'>
+              {String(row.getValue(accessorKey))}
+            </span>
+          </div>
+        )
+      },
+    }
+  }) as ColumnDef<Todo>[]),
   {
-    accessorKey: 'id',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Id' />
-    ),
-    cell: ({ row }) => {
-      return (
-        <div className='flex space-x-2'>
-          <span className='max-w-[500px] truncate font-medium'>
-            {row.getValue('id')}
-          </span>
-        </div>
-      )
-    },
-  },
-  {
-    accessorKey: 'task',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Task' />
-    ),
-    cell: ({ row }) => {
-      return (
-        <div className='flex space-x-2'>
-          <span className='max-w-[500px] truncate font-medium'>
-            {row.getValue('task')}
-          </span>
-        </div>
-      )
-    },
-  },
-  {
-    accessorKey: 'completed',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Completed' />
-    ),
-    cell: ({ row }) => {
-      return (
-        <div className='flex space-x-2'>
-          <span className='max-w-[500px] truncate font-medium'>
-            {row.getValue('completed') ? 'true' : 'false'}
-          </span>
-        </div>
-      )
-    },
-  },
-  {
-    accessorKey: 'createdAt',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Created At' />
-    ),
-    cell: ({ row }) => {
-      return (
-        <div className='flex space-x-2'>
-          <span className='max-w-[500px] truncate font-medium'>
-            {row.getValue('createdAt')}
-          </span>
-        </div>
-      )
-    },
-  },
-  {
-    accessorKey: 'updatedAt',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Updated At' />
-    ),
-    cell: ({ row }) => {
-      return (
-        <div className='flex space-x-2'>
-          <span className='max-w-[500px] truncate font-medium'>
-            {row.getValue('updatedAt')}
-          </span>
-        </div>
-      )
-    },
-  },
-  {
+    accessorKey: 'actions',
     id: 'actions',
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
