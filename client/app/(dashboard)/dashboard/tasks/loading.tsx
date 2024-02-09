@@ -2,9 +2,9 @@ import { DashboardHeader } from '@/components/header'
 import { DashboardShell } from '@/components/shell'
 import { Skeleton, SVGSkeleton } from '@/components/table-skeleton'
 
-const Dashboard{{pascalCase tableName}}Loading = () => (
+const DashboardTasksLoading = () => (
   <DashboardShell>
-    <DashboardHeader heading='{{titleCase tableName}}' text='Create and manage your {{lowerCase tableName}}.' />
+    <DashboardHeader heading='Tasks' text='Create and manage your tasks.' />
     <div className='grid gap-10'>
       <div className='h-full flex-1 flex-col space-y-8 overflow-hidden md:flex'>
         <div className='space-y-4'>
@@ -346,4 +346,4 @@ const Dashboard{{pascalCase tableName}}Loading = () => (
   </DashboardShell>
 )
 
-export default Dashboard{{pascalCase tableName}}Loading
+export default DashboardTasksLoading

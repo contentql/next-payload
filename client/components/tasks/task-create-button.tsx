@@ -23,13 +23,13 @@ import { Todo } from '@/types/payload-types'
 import { AlertDialogDescription } from '@radix-ui/react-alert-dialog'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-interface TodoCreateButtonProps extends ButtonProps {}
+interface TaskCreateButtonProps extends ButtonProps {}
 
-export function TodoCreateButton({
+export function TaskCreateButton({
   className,
   variant,
   ...props
-}: TodoCreateButtonProps) {
+}: TaskCreateButtonProps) {
   const router = useRouter()
   const [isCreateLoading, setIsCreateLoading] = React.useState<boolean>(false)
 

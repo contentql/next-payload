@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import * as React from 'react'
 
 import { keys } from '@/apis/query-keys'
-import { addTodo } from '@/apis/todos'
+import { add{{pascalCase tableName}} } from '@/apis/{{dashCase tableName}}'
 import { Icons } from '@/components/icons'
 import {
   AlertDialog,
@@ -19,17 +19,17 @@ import { ButtonProps, buttonVariants } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
 import { cn } from '@/lib/utils'
-import { Todo } from '@/types/payload-types'
+import { {{pascalCase tableName}} } from '@/types/payload-types'
 import { AlertDialogDescription } from '@radix-ui/react-alert-dialog'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-interface TodoCreateButtonProps extends ButtonProps {}
+interface {{pascalCase tableName}}CreateButtonProps extends ButtonProps {}
 
-export function TodoCreateButton({
+export function {{pascalCase tableName}}CreateButton({
   className,
   variant,
   ...props
-}: TodoCreateButtonProps) {
+}: {{pascalCase tableName}}CreateButtonProps) {
   const router = useRouter()
   const [isCreateLoading, setIsCreateLoading] = React.useState<boolean>(false)
 
@@ -39,21 +39,21 @@ export function TodoCreateButton({
   const queryClient = useQueryClient()
 
   const {
-    isPending: isAddTodoPending,
-    variables: addTodoVariables,
-    mutate: addTodoMutation,
+    isPending: isAdd{{pascalCase tableName}}Pending,
+    variables: add{{pascalCase tableName}}Variables,
+    mutate: add{{pascalCase tableName}}Mutation,
   } = useMutation({
-    mutationKey: keys('/api/todos', 'post').detail(input),
-    mutationFn: (todo: { task: Todo['task'] }) => addTodo(todo),
+    mutationKey: keys('/api/{{dashCase tableName}}', 'post').detail(input),
+    mutationFn: ({{camelCase tableName}}: { task: {{pascalCase tableName}}['{{camelCase tableName}}'] }) => add{{pascalCase tableName}}({{camelCase tableName}}),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: keys('/api/todos', 'get').main(),
+        queryKey: keys('/api/{{dashCase tableName}}', 'get').main(),
       })
     },
     onError: async () => {
       toast({
         title: 'Something went wrong.',
-        description: 'Your todo was not created. Please try again.',
+        description: 'Your {{lowerCase tableName}} was not created. Please try again.',
         variant: 'destructive',
       })
     },
@@ -71,13 +71,13 @@ export function TodoCreateButton({
         className={cn(buttonVariants({ variant }), className)}
         {...props}>
         <Icons.add className='mr-2 h-4 w-4' />
-        New task
+        New {{lowerCase tableName}}
       </button>
       <AlertDialog open={showCreateAlert} onOpenChange={setShowCreateAlert}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>
-              Add a New Task
+              Add a New {{titleCase tableName}}
               <Input
                 className='py-6'
                 type='text'
@@ -85,12 +85,12 @@ export function TodoCreateButton({
                   setInput(e.target.value)
                 }}
                 value={input}
-                placeholder='Enter Todo'
+                placeholder='Enter {{titleCase tableName}}'
                 required={true}
               />
             </AlertDialogTitle>
             <AlertDialogDescription>
-              Enter your new Todo here. Click create when done.
+              Enter your new {{titleCase tableName}} here. Click create when done.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -99,7 +99,7 @@ export function TodoCreateButton({
               onClick={async event => {
                 event.preventDefault()
                 setIsCreateLoading(true)
-                addTodoMutation({ task: input })
+                add{{pascalCase tableName}}Mutation({ task: input })
               }}
               className={cn(
                 buttonVariants({ variant }),

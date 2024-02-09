@@ -1,13 +1,44 @@
-'use client'; import { DashboardHeader } from '@/components/header'; import {
-DashboardShell } from '@/components/shell'; const SettingsView: React.FC = () =>
-{ return (
-<DashboardShell>
-  <DashboardHeader
-    heading='{{pascalCase name}}'
-    text='Website {{camelCase name}}.'
-  />
-  <div className='grid gap-10'>
-    {{name}}
-  </div>
-</DashboardShell>
-); }; export default SettingsView;
+'use client'
+
+import { keys } from '@/apis/query-keys'
+import { getAll{{pascalCase tableName}} } from '@/apis/{{dashCase tableName}}'
+import { EmptyPlaceholder } from '@/components/empty-placeholder'
+import { DashboardHeader } from '@/components/header'
+import { DashboardShell } from '@/components/shell'
+import { columns } from '@/components/{{dashCase tableName}}/columns'
+import { DataTable } from '@/components/{{dashCase tableName}}/data-table'
+import { {{pascalCase tableName}}CreateButton } from '@/components/{{dashCase tableName}}/{{dashCase tableName}}-create-button'
+import { useQuery } from '@tanstack/react-query'
+
+const {{pascalCase tableName}}View = () => {
+  const { data: {{camelCase tableName}}, isPending } = useQuery({
+    queryKey: keys('/api/{{dashCase tableName}}', 'get').main(),
+    queryFn: getAll{{pascalCase tableName}},
+  })
+
+  return (
+    <DashboardShell>
+      <DashboardHeader heading='{{titleCase tableName}}' text='Create and manage your {{lowerCase tableName}}.'>
+        <{{pascalCase tableName}}CreateButton />
+      </DashboardHeader>
+      <div className='grid gap-10'>
+        <div className='h-full flex-1 flex-col space-y-8 overflow-hidden md:flex'>
+          { {{camelCase tableName}}?.length && !isPending ? (
+            <DataTable data={ {{camelCase tableName}} } columns={columns} />
+          ) : (
+            <EmptyPlaceholder>
+              <EmptyPlaceholder.Icon name='post' />
+              <EmptyPlaceholder.Title>No {{lowerCase tableName}} created</EmptyPlaceholder.Title>
+              <EmptyPlaceholder.Description>
+                You don&apos;t have any {{lowerCase tableName}} yet. Start creating content.
+              </EmptyPlaceholder.Description>
+              <{{pascalCase tableName}}CreateButton variant='outline' />
+            </EmptyPlaceholder>
+          )}
+        </div>
+      </div>
+    </DashboardShell>
+  )
+}
+
+export default {{pascalCase tableName}}View

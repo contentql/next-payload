@@ -1,0 +1,10 @@
+'use client'
+
+import {{pascalCase tableName}}View from '@/app/_views/{{pascalCase tableName}}View';
+import isAuth from '@/components/auth/is-auth'
+
+const {{pascalCase tableName}} = () => {
+  return <{{pascalCase tableName}}View />;
+};
+
+export default isAuth({{pascalCase tableName}});

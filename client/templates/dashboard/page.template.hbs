@@ -1,10 +1,12 @@
-import {{pascalCase name}} from './_components/{{pascalCase name}}';
+import { Metadata } from 'next'
 
-export const metadata = {
-  title: '{{pascalCase name}}',
-  description: 'Manage {{pascalCase name}} and your subscription plan.',
-};
+import {{pascalCase tableName}} from '@/components/{{dashCase tableName}}/{{dashCase tableName}}'
 
-export default function {{pascalCase name}}Page() {
-  return <{{pascalCase name}} />;
+export const metadata: Metadata = {
+  title: '{{sentenceCase tableName}}',
+  description: 'Create and manage your {{lowerCase tableName}}.',
+}
+
+export default function {{pascalCase tableName}}Page() {
+  return <{{pascalCase tableName}} />
 }

@@ -1,0 +1,60 @@
+import { Checkbox } from '@/components/ui/checkbox'
+import { {{pascalCase tableName}} } from '@/types/payload-types'
+import { ColumnDef } from '@tanstack/react-table'
+import { columnsList } from './columns-list'
+import { DataTableColumnHeader } from './data-table-column-header'
+import { DataTableRowActions } from './data-table-row-actions'
+
+type ColumnListItem = {
+  accessorKey: string
+  title: string
+}
+
+export const columns: ColumnDef<{{pascalCase tableName}}>[] = [
+  {
+    id: 'select',
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && 'indeterminate')
+        }
+        onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
+        aria-label='Select all'
+        className='translate-y-[2px]'
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={value => row.toggleSelected(!!value)}
+        aria-label='Select row'
+        className='mr-2 translate-y-[2px]'
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  ...(columnsList.map(({ accessorKey, title }: ColumnListItem) => {
+    return {
+      accessorKey: accessorKey,
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title={title} />
+      ),
+      cell: ({ row }) => {
+        return (
+          <div className='flex space-x-2'>
+            <span className='max-w-[500px] truncate font-medium'>
+              {String(row.getValue(accessorKey))}
+            </span>
+          </div>
+        )
+      },
+    }
+  }) as ColumnDef<{{pascalCase tableName}}>[]),
+  {
+    accessorKey: 'actions',
+    id: 'actions',
+    cell: ({ row }) => <DataTableRowActions row={row} />,
+  },
+]
