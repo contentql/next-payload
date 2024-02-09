@@ -26,8 +26,8 @@ import { toast } from '@/components/ui/use-toast'
 import { Todo } from '@/types/payload-types'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import React from 'react'
-import { Icons } from './icons'
-import { Input } from './ui/input'
+import { Icons } from '../icons'
+import { Input } from '../ui/input'
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>
@@ -80,8 +80,8 @@ export function DataTableRowActions<TData extends Todo>({
     mutationKey: keys(`/api/todos/${row.original.id}`, 'patch').detail(
       row.original.id,
     ),
-    mutationFn: (obj: { id: Todo['id']; task: Todo['task'] }) =>
-      editTodo(obj.id, { task: obj.task }),
+    mutationFn: (obj: Partial<Todo>) =>
+      editTodo(obj.id as string, { task: obj.task }),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: keys('/api/todos', 'get').main(),

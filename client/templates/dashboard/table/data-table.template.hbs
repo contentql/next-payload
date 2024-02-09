@@ -17,6 +17,8 @@ import {
 import * as React from 'react'
 import { useLocalStorage } from 'react-haiku'
 
+import { DataTablePagination } from '@/components/{{camelCase name}}/data-table-pagination'
+import { DataTableToolbar } from '@/components/{{camelCase name}}/data-table-toolbar'
 import {
   Table,
   TableBody,
@@ -25,9 +27,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-
-import { DataTablePagination } from '../components/data-table-pagination'
-import { DataTableToolbar } from '../components/data-table-toolbar'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]

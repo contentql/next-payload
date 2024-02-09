@@ -2,11 +2,11 @@
 
 import { keys } from '@/apis/query-keys'
 import { getAllTodos } from '@/apis/todos'
-import { columns } from '@/components/columns'
-import { DataTable } from '@/components/data-table'
 import { EmptyPlaceholder } from '@/components/empty-placeholder'
 import { DashboardHeader } from '@/components/header'
 import { DashboardShell } from '@/components/shell'
+import { columns } from '@/components/tasks/columns'
+import { DataTable } from '@/components/tasks/data-table'
 import { TodoCreateButton } from '@/components/todo-create-button'
 import { useQuery } from '@tanstack/react-query'
 
