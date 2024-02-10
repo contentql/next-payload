@@ -24,7 +24,7 @@ const Users: CollectionConfig = {
     cookies: {
       secure: true,
       sameSite: 'lax',
-      // domain: '',
+      domain: process.env.PAYLOAD_COOKIE_DOMAIN,
     },
   },
   // auth: true,
