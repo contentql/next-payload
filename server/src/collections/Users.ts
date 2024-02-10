@@ -23,6 +23,8 @@ const Users: CollectionConfig = {
   auth: {
     cookies: {
       secure: true,
+      sameSite: 'lax',
+      // domain: '',
     },
   },
   // auth: true,
