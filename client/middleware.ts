@@ -9,9 +9,15 @@ export const middleware = async (req: NextRequest) => {
   const protectedRoutes = routesConfig.dashboardProtectRoutes
   const pathname = req.nextUrl.pathname
 
-  console.log('middleware triggered', auth)
+  console.log(
+    req.cookies.getAll().find(cookie => cookie.name === 'payload-token')?.value,
+  )
 
-  if (!auth && protectedRoutes.includes(pathname)) {
+  const cookieToken = req.cookies
+    .getAll()
+    .find(cookie => cookie.name === 'payload-token')?.value
+
+  if (!cookieToken && protectedRoutes.includes(pathname)) {
     const absoluteURL = new URL('/login', req.nextUrl.origin)
     return NextResponse.redirect(absoluteURL.toString())
   }
