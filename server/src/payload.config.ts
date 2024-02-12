@@ -7,6 +7,7 @@ import { cloudStorage } from '@payloadcms/plugin-cloud-storage';
 import { slateEditor } from '@payloadcms/richtext-slate';
 import { buildConfig } from 'payload/config';
 
+import { Media } from './collections/Media';
 import Todos from './collections/Todos';
 import Users from './collections/Users';
 import { minioAdapter } from './config/minio.config';
@@ -27,7 +28,7 @@ export default buildConfig({
     },
   },
   editor: slateEditor({}),
-  collections: [Users, Todos],
+  collections: [Users, Todos, Media],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
