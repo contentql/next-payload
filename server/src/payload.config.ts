@@ -15,6 +15,16 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     bundler: webpackBundler(),
+    webpack: (config) => {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        util: false,
+        os: false,
+      };
+
+      return config;
+    },
   },
   editor: slateEditor({}),
   collections: [Users, Todos],
