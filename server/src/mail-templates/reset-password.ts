@@ -1,4 +1,6 @@
-export const resetPasswordTemplate = (token, user, resetPasswordURL) => `
+export const resetPasswordTemplate = ({ token }) => {
+  const resetPasswordURL = `${process.env.PAYLOAD_PUBLIC_CLIENT_URL}/reset?token=${token}`;
+  return `
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 
@@ -465,3 +467,4 @@ export const resetPasswordTemplate = (token, user, resetPasswordURL) => `
 
 </html>
 `;
+};
