@@ -1,13 +1,15 @@
 import path from 'path';
 
-import { payloadCloud } from '@payloadcms/plugin-cloud';
-import { mongooseAdapter } from '@payloadcms/db-mongodb';
 import { webpackBundler } from '@payloadcms/bundler-webpack';
+import { mongooseAdapter } from '@payloadcms/db-mongodb';
+import { payloadCloud } from '@payloadcms/plugin-cloud';
+import { cloudStorage } from '@payloadcms/plugin-cloud-storage';
 import { slateEditor } from '@payloadcms/richtext-slate';
 import { buildConfig } from 'payload/config';
 
-import Users from './collections/Users';
 import Todos from './collections/Todos';
+import Users from './collections/Users';
+import { minioAdapter } from './config/minio.config';
 
 export default buildConfig({
   admin: {
@@ -22,7 +24,16 @@ export default buildConfig({
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  plugins: [payloadCloud()],
+  plugins: [
+    payloadCloud(),
+    cloudStorage({
+      collections: {
+        media: {
+          adapter: minioAdapter,
+        },
+      },
+    }),
+  ],
   db: mongooseAdapter({
     url: process.env.DATABASE_URI,
   }),
