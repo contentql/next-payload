@@ -284,7 +284,7 @@ export const resetPasswordTemplate = (token, user, resetPasswordURL) => `
  best way to organize, share and use all your visual assets in one place -
  all on your desktop.">
                                   <img align="none" alt="ContentQL is the best way to
- organize, share and use all your visual assets in one place - all on your desktop." height="32" src="https://static.lingoapp.com/assets/images/email/lingo-logo.png" style="-ms-interpolation-mode: bicubic; border: 0; outline: none;
+ organize, share and use all your visual assets in one place - all on your desktop." height="32" src="https://www.contentql.io/analytica/Logo/Analyticalogo+white-text.png" style="-ms-interpolation-mode: bicubic; border: 0; outline: none;
  text-decoration: none; height: auto; width: 107px; height: 32px; margin: 0px;" width="107" />
                                 </a>
                               </td>
@@ -446,135 +446,10 @@ export const resetPasswordTemplate = (token, user, resetPasswordURL) => `
                     </tr>
                   </tbody>
                 </table>
-                <table border="0" cellpadding="0" cellspacing="0" class="mcnImageBlock" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0;
- -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; min-width:100%;" width="100%">
-                  <tbody class="mcnImageBlockOuter">
-                    <tr>
-                      <td class="mcnImageBlockInner" style="mso-line-height-rule: exactly;
- -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding:0px" valign="top">
-                        <table align="left" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer" style="border-collapse: collapse; mso-table-lspace: 0;
- mso-table-rspace: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust:
- 100%; min-width:100%;" width="100%">
-                          <tbody>
-                            <tr>
-                              <td class="mcnImageContent" style="mso-line-height-rule: exactly;
- -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding-right: 0px;
- padding-left: 0px; padding-top: 0; padding-bottom: 0; text-align:center;" valign="top"></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                
               </td>
             </tr>
-            <tr>
-              <td id="templateFooter" style="mso-line-height-rule: exactly;
- -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; background-color: #fed149;
- border-top: 0; border-bottom: 0; padding-top: 8px; padding-bottom: 80px" valign="top">
-                <table border="0" cellpadding="0" cellspacing="0" class="mcnTextBlock" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0;
- -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; min-width:100%;" width="100%">
-                  <tbody class="mcnTextBlockOuter">
-                    <tr>
-                      <td class="mcnTextBlockInner" style="mso-line-height-rule: exactly;
- -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%" valign="top">
-                        <table align="center" bgcolor="#F7F7FF" border="0" cellpadding="32" cellspacing="0" class="card" style="border-collapse: collapse; mso-table-lspace: 0;
- mso-table-rspace: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust:
- 100%; background:#F7F7FF; margin:auto; text-align:left; max-width:600px;
- font-family: 'Asap', Helvetica, sans-serif;" text-align="left" width="100%">
-                          <tr>
-                            <td style="mso-line-height-rule: exactly; -ms-text-size-adjust: 100%;
- -webkit-text-size-adjust: 100%">
-
-                              <h3 style='color: #2a2a2a; font-family: "Asap", Helvetica, sans-serif;
- font-size: 20px; font-style: normal; font-weight: normal; line-height: 125%;
- letter-spacing: normal; text-align: center; display: block; margin: 0; padding:
- 0; text-align: left; width: 100%; font-size: 16px; font-weight: bold; '>What
- is lingo?</h3>
-
-                              <p style='margin: 10px 0; padding: 0; mso-line-height-rule: exactly;
- -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; color: #2a2a2a;
- font-family: "Asap", Helvetica, sans-serif; font-size: 12px; line-height: 150%;
- text-align: left; text-align: left; font-size: 14px; '>lingo is a visual asset manager made for collaboration. Build a central library for your team's visual assets. Empower creation and ensure consistency from your desktop.
-                              </p>
-                              <div style="padding-bottom: 18px;">
-                                <a href="https://www.lingoapp.com" style="mso-line-height-rule: exactly; -ms-text-size-adjust: 100%;
- -webkit-text-size-adjust: 100%; color: #f57153; font-weight: normal; text-decoration: none;
- font-size: 14px; color:#F57153; text-decoration:none;" target="_blank" title="Learn more about lingo">Learn More ❯</a>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-                        <table align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0;
- -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; min-width:100%;" width="100%">
-                          <tbody>
-                            <tr>
-                              <td style="mso-line-height-rule: exactly; -ms-text-size-adjust: 100%;
- -webkit-text-size-adjust: 100%; padding-top: 24px; padding-right: 18px;
- padding-bottom: 24px; padding-left: 18px; color: #7F6925; font-family: 'Asap',
- Helvetica, sans-serif; font-size: 12px;" valign="top">
-                                <div style="text-align: center;">Made with
-                                  <a href="https://thenounproject.com/" style="mso-line-height-rule: exactly; -ms-text-size-adjust: 100%;
- -webkit-text-size-adjust: 100%; color: #f57153; font-weight: normal; text-decoration:
- none" target="_blank">
-                                    <img align="none" alt="Heart icon" height="10" src="https://static.lingoapp.com/assets/images/email/made-with-heart.png" style="-ms-interpolation-mode: bicubic; border: 0; height: auto; outline: none;
- text-decoration: none; width: 10px; height: 10px; margin: 0px;" width="10" />
-                                  </a>by
-                                  <a href="https://thenounproject.com/" style="mso-line-height-rule: exactly;
- -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; color: #f57153;
- font-weight: normal; text-decoration: none; color:#7F6925;" target="_blank" title="Noun Project - Icons for Everything">Noun Project</a>in Culver City, CA 90232</div>
-                              </td>
-                            </tr>
-                            <tbody></tbody>
-                          </tbody>
-                        </table>
-                        <table align="center" border="0" cellpadding="12" style="border-collapse:
- collapse; mso-table-lspace: 0; mso-table-rspace: 0; -ms-text-size-adjust:
- 100%; -webkit-text-size-adjust: 100%; ">
-                          <tbody>
-                            <tr>
-                              <td style="mso-line-height-rule: exactly; -ms-text-size-adjust: 100%;
- -webkit-text-size-adjust: 100%">
-                                <a href="https://twitter.com/@lingo_app" style="mso-line-height-rule: exactly; -ms-text-size-adjust: 100%;
- -webkit-text-size-adjust: 100%; color: #f57153; font-weight: normal; text-decoration: none" target="_blank">
-                                  <img alt="twitter" height="32" src="https://static.lingoapp.com/assets/images/email/twitter-ic-32x32-email@2x.png" style="-ms-interpolation-mode: bicubic; border: 0; height: auto; outline: none; text-decoration:
- none" width="32" />
-                                </a>
-                              </td>
-                              <td style="mso-line-height-rule: exactly; -ms-text-size-adjust: 100%;
- -webkit-text-size-adjust: 100%">
-                                <a href="https://www.instagram.com/lingo_app/" style="mso-line-height-rule: exactly; -ms-text-size-adjust: 100%;
- -webkit-text-size-adjust: 100%; color: #f57153; font-weight: normal; text-decoration:
- none" target="_blank">
-                                  <img alt="Instagram" height="32" src="https://static.lingoapp.com/assets/images/email/instagram-ic-32x32-email@2x.png" style="-ms-interpolation-mode: bicubic; border: 0; height: auto; outline: none;
- text-decoration: none" width="32" />
-                                </a>
-                              </td>
-                              <td style="mso-line-height-rule: exactly; -ms-text-size-adjust: 100%;
- -webkit-text-size-adjust: 100%">
-                                <a href="https://medium.com/@lingo_app" style="mso-line-height-rule: exactly; -ms-text-size-adjust: 100%;
- -webkit-text-size-adjust: 100%; color: #f57153; font-weight: normal; text-decoration: none" target="_blank">
-                                  <img alt="medium" height="32" src="https://static.lingoapp.com/assets/images/email/medium-ic-32x32-email@2x.png" style="-ms-interpolation-mode: bicubic; border: 0; height: auto; outline: none; text-decoration: none" width="32" />
-                                </a>
-                              </td>
-                              <td style="mso-line-height-rule: exactly; -ms-text-size-adjust: 100%;
- -webkit-text-size-adjust: 100%">
-                                <a href="https://www.facebook.com/lingoapp/" style="mso-line-height-rule: exactly; -ms-text-size-adjust: 100%;
- -webkit-text-size-adjust: 100%; color: #f57153; font-weight: normal; text-decoration: none" target="_blank">
-                                  <img alt="facebook" height="32" src="https://static.lingoapp.com/assets/images/email/facebook-ic-32x32-email@2x.png" style="-ms-interpolation-mode: bicubic; border: 0; height: auto; outline: none;
- text-decoration: none" width="32" />
-                                </a>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
+           
           </table>
           <!--[if gte mso 9]>
                   </td>
