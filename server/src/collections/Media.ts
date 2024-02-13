@@ -4,14 +4,6 @@ import type { CollectionConfig, Field } from 'payload/types';
 const urlField: Field = {
   name: 'url',
   type: 'text',
-  hooks: {
-    afterRead: [
-      ({ value }) => {
-        console.log('hello from hook');
-        return value;
-      },
-    ],
-  },
 };
 
 export const Media: CollectionConfig = {
@@ -30,7 +22,31 @@ export const Media: CollectionConfig = {
         crop: 'center',
         name: 'sixteenByNineMedium',
       },
+      {
+        name: 'thumbnail',
+        width: 400,
+        height: 300,
+        position: 'centre',
+      },
+      {
+        name: 'card',
+        width: 768,
+        height: 1024,
+        position: 'centre',
+      },
+      {
+        name: 'tablet',
+        width: 1024,
+        // By specifying `undefined` or leaving a height undefined,
+        // the image will be sized to a certain width,
+        // but it will retain its original aspect ratio
+        // and calculate a height automatically.
+        height: undefined,
+        position: 'centre',
+      },
     ],
+    focalPoint: false,
+    crop: false,
   },
   fields: [
     {
