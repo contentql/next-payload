@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import Forgot from './_components/Forgot';
+import EmailSuccess from './_components/EmailSuccess';
 
 export const metadata: Metadata = {
   title: 'forgot password',
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function LoginPage() {
-  return <Forgot />;
+  return <EmailSuccess />;
 }
