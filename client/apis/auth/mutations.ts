@@ -27,3 +27,21 @@ export const createUser = async (data: User) => {
     console.log(error)
   }
 }
+
+export const forgotPassword = async (email: { email: User }) => {
+  try {
+    const res = await http.post('/api/users/forgot-password', email)
+    return res.data.doc
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const resetPassword = async (password: { password: User }) => {
+  try {
+    const res = await http.post('/api/users/reset-password', password)
+    return res.data.doc
+  } catch (error) {
+    console.log(error)
+  }
+}

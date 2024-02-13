@@ -1,16 +1,19 @@
-import { CollectionAfterChangeHook } from 'payload/types';
 import payload from 'payload';
+import { CollectionAfterChangeHook } from 'payload/types';
+import { welcomeMail } from '../mail-templates/welcome-mail';
 
+const OPERATION = 'create';
+const SUBJECT = 'Welcome To ContentQL';
 export const sendWelcomeEmail: CollectionAfterChangeHook = async ({
   operation,
   doc,
 }) => {
-  if (operation === 'create') {
+  if (operation === OPERATION) {
     payload.sendEmail({
       to: doc.email,
       from: process.env.SENDGRID_SENDER_EMAIL,
-      subject: 'Welcome To Payload',
-      html: '<b>Hey there!</b><br/>Welcome to Payload!',
+      subject: SUBJECT,
+      html: welcomeMail(doc),
     });
   }
 };

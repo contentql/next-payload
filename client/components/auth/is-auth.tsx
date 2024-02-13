@@ -7,7 +7,7 @@
 import { currentUser } from '@/apis/auth/queries'
 import { keys } from '@/apis/query-keys'
 import { useQuery } from '@tanstack/react-query'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import LoggedUser from './LoginPageAcces'
 import RegisterPageAccess from './RegisterPageAccess'
 
