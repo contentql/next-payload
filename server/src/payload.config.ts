@@ -29,6 +29,9 @@ export default buildConfig({
   },
   editor: slateEditor({}),
   collections: [Users, Todos, Media],
+  upload: {
+    useTempFiles: true,
+  },
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
