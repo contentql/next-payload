@@ -10,7 +10,7 @@ import { buildConfig } from 'payload/config';
 import { Media } from './collections/Media';
 import Todos from './collections/Todos';
 import Users from './collections/Users';
-import { minioAdapter } from './config/minio.config';
+import { s3StorageAdapter } from './config/s3.config';
 
 export default buildConfig({
   admin: {
@@ -43,7 +43,7 @@ export default buildConfig({
     cloudStorage({
       collections: {
         media: {
-          adapter: minioAdapter,
+          adapter: s3StorageAdapter,
         },
       },
     }),
