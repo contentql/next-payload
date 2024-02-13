@@ -1,3 +1,5 @@
+'use client'
+
 import { resetPassword } from '@/apis/auth/mutations'
 import { keys } from '@/apis/query-keys'
 import { Button } from '@/components/ui/button'
@@ -18,18 +20,28 @@ import { GiCheckMark } from 'react-icons/gi'
 
 import { useSearchParams } from 'next/navigation'
 
+const TOKEN = 'token'
+
 export default function ResetView() {
   const searchParams = useSearchParams()
+  const token = searchParams.get(TOKEN)
+
   const router = useRouter()
-  const { register, handleSubmit, formState, getValues } = useForm({
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm({
     defaultValues: {
       newPassword: '',
       conformNewPassword: '',
     },
   })
-  const { errors } = formState
+  // const { errors } = formState
 
-  if (!searchParams.has('token')) {
+  if (!token) {
     router.push('/login')
   }
 
@@ -48,12 +60,13 @@ export default function ResetView() {
     },
   })
 
-  const onsubmit = (data: any) => {
+  const onsubmit = ({ newPassword }: { newPassword: string }) => {
     resetMutation({
-      token: searchParams.get('token'),
-      password: data.newPassword,
+      token: token,
+      password: newPassword,
     })
   }
+
   return (
     <div>
       {resetSuccess ? (
@@ -63,8 +76,7 @@ export default function ResetView() {
               <GiCheckMark size={36} color='green' />
             </CardTitle>
             <CardDescription>
-              Your password has been reseted successfully. redirected to
-              dashboard
+              Your password reset is successfully. Redirecting to dashboard...
             </CardDescription>
           </CardHeader>
         </Card>

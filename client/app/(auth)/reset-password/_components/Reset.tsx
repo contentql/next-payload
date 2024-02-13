@@ -7,6 +7,7 @@ import isAuth from '@/components/auth/is-auth'
 import { Icons } from '@/components/icons'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { Suspense } from 'react'
 
 const Login = () => {
   return (
@@ -23,7 +24,9 @@ const Login = () => {
         </>
       </Link>
       <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]'>
-        <ResetView />
+        <Suspense>
+          <ResetView />
+        </Suspense>
       </div>
     </div>
   )
