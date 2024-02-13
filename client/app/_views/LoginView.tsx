@@ -43,10 +43,11 @@ const LoginView = () => {
 
       setEmail('')
       setPassword('')
+      router.push('/dashboard')
     },
   })
 
-  loginSuccess && router.push('/dashboard')
+  //loginSuccess &&
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -86,6 +87,9 @@ const LoginView = () => {
                 onChange={e => setPassword(e.target.value)}
                 required
               />
+              <div className='mt-4 text-end text-sm underline'>
+                <Link href='/forgot-password'>Forgot password</Link>
+              </div>
             </div>
             <Button className='w-full' type='submit'>
               Login

@@ -1,7 +1,7 @@
 import { CollectionConfig } from 'payload/types';
 import { isAdminFieldLevel } from '../access/isAdmin';
 import { sendWelcomeEmail } from '../hooks/sendWelcomeEmail';
-import { sendForgetPasswordEmail } from '../hooks/sendForgetPasswordEmail';
+import { resetPasswordTemplate } from '../mail-templates/reset-password';
 
 const Users: CollectionConfig = {
   slug: 'users',
@@ -11,12 +11,14 @@ const Users: CollectionConfig = {
       sameSite: 'strict',
       domain: process.env.PAYLOAD_COOKIE_DOMAIN,
     },
+    forgotPassword: {
+      generateEmailHTML: resetPasswordTemplate,
+    },
   },
   admin: {
     useAsTitle: 'email',
   },
   hooks: {
-    afterForgotPassword: [sendForgetPasswordEmail],
     afterChange: [sendWelcomeEmail],
   },
   fields: [
