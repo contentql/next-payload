@@ -1,9 +1,12 @@
-import Dashboard from './_components/Dashboard'
+import DashboardView from '@/app/_views/DashboardView'
 
 export const metadata = {
   title: 'Dashboard',
+  description: 'This page to display all the projects',
 }
 
-export default function DashboardPage() {
-  return <Dashboard />
+const DashboardPage = () => {
+  return <DashboardView />
 }
+
+export default DashboardPage
