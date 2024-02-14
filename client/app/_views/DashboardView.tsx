@@ -1,6 +1,7 @@
 'use client'
 
 import CreateProjectAlert from '@/components/dashboard/create-project-alert'
+import Projects from '@/components/dashboard/projects'
 import { EmptyPlaceholder } from '@/components/empty-placeholder'
 import { DashboardHeader } from '@/components/header'
 import { Icons } from '@/components/icons'
@@ -42,6 +43,7 @@ const DashboardView = () => {
           setInput={setInput}
         />
       </DashboardHeader>
+      <Projects setShowCreateAlert={setShowCreateAlert} />
     </DashboardShell>
   )
 }
