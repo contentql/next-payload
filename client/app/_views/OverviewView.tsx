@@ -3,9 +3,9 @@ import { TabsContent } from '@/components/ui/tabs'
 
 const OverviewView = () => {
   const services = [
-    { id: 1, name: 'Frontend', description: 'nextjs application' },
-    { id: 2, name: 'Backend', description: 'payload cms' },
-    { id: 3, name: 'Database', description: 'mongodb' },
+    { id: '1', name: 'Frontend', description: 'nextjs application' },
+    { id: '2', name: 'Backend', description: 'payload cms' },
+    { id: '3', name: 'Database', description: 'mongodb' },
   ]
 
   return (

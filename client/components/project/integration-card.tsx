@@ -7,16 +7,20 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 
-const IntegrationCard = ({ data }: { data: { id: number; name: String } }) => {
-  const { id, name } = data
+const IntegrationCard = ({
+  integration,
+}: {
+  integration: { id: string; name: string; description: string }
+}) => {
+  const { id, name, description } = integration
 
   return (
-    <Card className='relative cursor-pointer transition-shadow duration-200 ease-in-out hover:shadow-lg'>
+    <Card className='cursor-pointer transition-shadow duration-200 ease-in-out hover:shadow-lg'>
       <CardHeader className='flex flex-row items-center gap-4'>
         <Icons.project className='h-8 w-8' />
         <div className='grid gap-1'>
           <CardTitle>{name}</CardTitle>
-          <CardDescription>Integration description</CardDescription>
+          <CardDescription>{description}</CardDescription>
         </div>
       </CardHeader>
       <CardContent className='grid gap-2'>

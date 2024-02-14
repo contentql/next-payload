@@ -1,4 +1,3 @@
-import { Icons } from '@/components/icons'
 import {
   Card,
   CardContent,
@@ -6,18 +5,22 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { useRouter } from 'next/navigation'
 
-const ServiceCard = ({
-  service,
+const ProjectCard = ({
+  project,
 }: {
-  service: { id: string; name: string; description: string }
+  project: { id: string; name: string; description: string }
 }) => {
-  const { id, name, description } = service
+  const { id, name, description } = project
+
+  const router = useRouter()
 
   return (
-    <Card className='relative cursor-pointer transition-shadow duration-200 ease-in-out hover:shadow-lg'>
+    <Card
+      className='relative cursor-pointer transition-shadow duration-200 ease-in-out hover:shadow-lg'
+      onClick={() => router.push(`/project/${id}`)}>
       <CardHeader className='flex flex-row items-center gap-4'>
-        <Icons.project className='h-8 w-8' />
         <div className='grid gap-1'>
           <CardTitle>{name}</CardTitle>
           <CardDescription>{description}</CardDescription>
@@ -31,4 +34,4 @@ const ServiceCard = ({
   )
 }
 
-export default ServiceCard
+export default ProjectCard

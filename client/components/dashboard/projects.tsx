@@ -1,15 +1,22 @@
-import { Badge } from '@/components/ui/badge'
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
 import { Icons } from '../icons'
+import ProjectCard from './project-card'
 
 const Projects = (props: { setShowCreateAlert: Function }) => {
   const { setShowCreateAlert } = props
+
+  const projects = [
+    {
+      id: '1d4ee742-bc9a-40bb-8bc7-b84e77629c0f',
+      name: 'Our Saas',
+      description: 'this is a saas project',
+    },
+  ]
 
   return (
     <div className='flex min-h-screen w-full flex-col'>
@@ -26,21 +33,9 @@ const Projects = (props: { setShowCreateAlert: Function }) => {
               </div>
             </CardHeader>
           </Card>
-          <Card className='cursor-pointer transition-shadow duration-200 ease-in-out hover:shadow-lg'>
-            <CardHeader className='flex flex-row items-center gap-4'>
-              <Icons.project className='h-8 w-8' />
-              <div className='grid gap-1'>
-                <CardTitle>Project Title</CardTitle>
-                <CardDescription>Project description</CardDescription>
-              </div>
-            </CardHeader>
-            <CardContent className='grid gap-2'>
-              <div className='text-sm font-semibold'>
-                Last update: 3 hours ago
-              </div>
-              <Badge className='w-fit'>Active</Badge>
-            </CardContent>
-          </Card>
+          {projects.map(project => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
         </div>
       </main>
     </div>
