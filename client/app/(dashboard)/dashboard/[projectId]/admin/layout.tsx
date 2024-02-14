@@ -1,4 +1,5 @@
 'use client'
+
 import { MainNav } from '@/components/main-nav'
 import { DashboardNav } from '@/components/nav'
 import { SiteFooter } from '@/components/site-footer'
