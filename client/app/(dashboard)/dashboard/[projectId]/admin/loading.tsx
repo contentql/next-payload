@@ -1,7 +1,7 @@
-import { DashboardHeader } from '@/components/header';
-import { DashboardShell } from '@/components/shell';
-import { TodoCreateButton } from '@/components/todo-create-button';
-import { TodoItem } from '@/components/todo-item';
+import { DashboardHeader } from '@/components/header'
+import { DashboardShell } from '@/components/shell'
+import { TodoCreateButton } from '@/components/todo-create-button'
+import { TodoItem } from '@/components/todo-item'
 
 export default function DashboardLoading() {
   return (
@@ -17,5 +17,5 @@ export default function DashboardLoading() {
         <TodoItem.Skeleton />
       </div>
     </DashboardShell>
-  );
+  )
 }
