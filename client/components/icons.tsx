@@ -9,6 +9,7 @@ import {
   File,
   FileText,
   HelpCircle,
+  Home,
   Image,
   Laptop,
   Lightbulb,
@@ -53,6 +54,7 @@ export const Icons = {
   moon: Moon,
   laptop: Laptop,
   save: Save,
+  home: Home,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden='true'

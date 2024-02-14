@@ -11,7 +11,7 @@ const OverviewView = () => {
   return (
     <TabsContent value='overview'>
       <div className='flex min-h-screen w-full flex-col'>
-        <main className='flex min-h-[calc(100vh-_theme(spacing.16))] flex-1 flex-col gap-4 md:gap-8 md:p-10'>
+        <main className='flex min-h-[calc(100vh-_theme(spacing.16))] flex-1 flex-col gap-4 md:gap-8 md:py-3'>
           <div className='mx-auto grid w-full max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3'>
             {services.map(service => (
               <ServiceCard key={service?.id} service={service} />

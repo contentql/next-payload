@@ -15,7 +15,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           <UserAccountNav />
         </div>
       </header>
-      <div className='container flex-1'>
+      <div className='container flex-1 md:px-20'>
         <main className='flex w-full flex-1 flex-col overflow-hidden'>
           {children}
         </main>

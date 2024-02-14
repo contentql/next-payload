@@ -2,30 +2,15 @@
 
 import CreateProjectAlert from '@/components/dashboard/create-project-alert'
 import Projects from '@/components/dashboard/projects'
-import { EmptyPlaceholder } from '@/components/empty-placeholder'
 import { DashboardHeader } from '@/components/header'
 import { Icons } from '@/components/icons'
 import { DashboardShell } from '@/components/shell'
-import { TodoCreateButton } from '@/components/todo-create-button'
 import { Button } from '@/components/ui/button'
 import React from 'react'
 
 const DashboardView = () => {
   const [input, setInput] = React.useState('')
   const [showCreateAlert, setShowCreateAlert] = React.useState(false)
-
-  if (!true) {
-    return (
-      <EmptyPlaceholder>
-        <EmptyPlaceholder.Icon name='post' />
-        <EmptyPlaceholder.Title>No projects created</EmptyPlaceholder.Title>
-        <EmptyPlaceholder.Description>
-          You don&apos;t have any projects yet. Start creating a new project.
-        </EmptyPlaceholder.Description>
-        <TodoCreateButton variant='outline' />
-      </EmptyPlaceholder>
-    )
-  }
 
   return (
     <DashboardShell>
