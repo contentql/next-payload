@@ -1,19 +1,22 @@
-import { CollectionConfig } from 'payload/types';
-import { isAdminFieldLevel } from '../access/isAdmin';
-import { sendWelcomeEmail } from '../hooks/sendWelcomeEmail';
-import { sendForgetPasswordEmail } from '../hooks/sendForgetPasswordEmail';
+import { CollectionConfig } from "payload/types";
+import { isAdminFieldLevel } from "../access/isAdmin";
+import { sendWelcomeEmail } from "../hooks/sendWelcomeEmail";
+import { sendForgetPasswordEmail } from "../hooks/sendForgetPasswordEmail";
 
 const Users: CollectionConfig = {
-  slug: 'users',
+  slug: "users",
   auth: {
     cookies: {
       secure: true,
-      sameSite: 'strict',
+      sameSite: "strict",
       domain: process.env.PAYLOAD_COOKIE_DOMAIN,
     },
   },
   admin: {
-    useAsTitle: 'email',
+    useAsTitle: "email",
+  },
+  access: {
+    read: () => true,
   },
   hooks: {
     afterForgotPassword: [sendForgetPasswordEmail],
@@ -21,13 +24,13 @@ const Users: CollectionConfig = {
   },
   fields: [
     {
-      name: 'roles',
-      type: 'select',
+      name: "roles",
+      type: "select",
       options: [
-        { label: 'Admin', value: 'admin' },
-        { label: 'user', value: 'user' },
+        { label: "Admin", value: "admin" },
+        { label: "user", value: "user" },
       ],
-      defaultValue: ['user'],
+      defaultValue: ["user"],
       hasMany: true,
       saveToJWT: true,
       access: {

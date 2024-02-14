@@ -1,4 +1,5 @@
 import { CollectionConfig } from "payload/types";
+import { ProductSelect } from "../ui/ProductSelect";
 
 const Products: CollectionConfig = {
   slug: "products",
@@ -17,7 +18,7 @@ const Products: CollectionConfig = {
       label: "Price",
       type: "group",
       admin: {
-        readOnly: true,
+        // readOnly: true,
         description:
           "All pricing information is managed in Stripe and will be reflected here.",
       },
@@ -26,11 +27,21 @@ const Products: CollectionConfig = {
           name: "stripePriceID",
           label: "Stripe Price ID",
           type: "text",
+          // admin: {
+          //   components: {
+          //     Field: ProductSelect,
+          //   },
+          // },
         },
         {
           name: "stripeJSON",
           label: "Stripe JSON",
           type: "textarea",
+          admin: {
+            readOnly: true,
+            hidden: true,
+            rows: 10,
+          },
         },
       ],
     },
