@@ -1,7 +1,7 @@
 import ProjectView from '@/app/_views/ProjectView'
+import ServiceDetails from '@/components/project/service-details-card'
 
 const ProjectPage = ({ params }: { params: any }) => {
-  console.log(params)
   return <ProjectView params={params} />
 }
 

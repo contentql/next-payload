@@ -10,7 +10,7 @@
 .dark .ce-toolbar__plus:hover {
   background: theme('colors.popover.DEFAULT');
   color: inherit;
-	border-color: theme('colors.border');
+  border-color: theme('colors.border');
 }
 
 .dark .ce-inline-tool,
@@ -23,14 +23,14 @@
 
 .dark .ce-popover__item-icon,
 .dark .ce-conversion-tool__icon {
-	background-color: theme('colors.muted.DEFAULT');
-	box-shadow: none;
+  background-color: theme('colors.muted.DEFAULT');
+  box-shadow: none;
 }
 
 .dark .cdx-search-field {
-	border-color: theme('colors.border');
-	background: theme('colors.input');
-	color: inherit;
+  border-color: theme('colors.border');
+  background: theme('colors.input');
+  color: inherit;
 }
 
 .dark ::selection {
@@ -47,8 +47,8 @@
 .dark .ce-popover__item:hover,
 .dark .ce-conversion-tool:hover,
 .dark .ce-toolbar__settings-btn:hover {
-  background-color:theme('colors.accent.DEFAULT');
-  color: theme('colors.accent.foreground');;
+  background-color: theme('colors.accent.DEFAULT');
+  color: theme('colors.accent.foreground');
 }
 
 .dark .cdx-notify--error {
@@ -58,4 +58,20 @@
 .dark .cdx-notify__cross::after,
 .dark .cdx-notify__cross::before {
   background: white;
+}
+
+.service-details-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50%; /* Adjust width as needed */
+  height: 100vh;
+  background-color: #bf3333;
+  z-index: 1000; /* Ensure it's above other content */
+  transform: translateX(100%);
+  transition: transform 0.3s ease-out; /* Add animation */
+}
+
+.service-details-container.active {
+  transform: translateX(50%);
 }
