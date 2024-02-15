@@ -9,6 +9,8 @@ export const syncPriceJSON = async (args) => {
 
   const { id: eventID, default_price } = event.data.object;
 
+  console.log("eventtttttt", event.data.object);
+
   let payloadProductID;
 
   // First lookup the product in Payload
@@ -39,6 +41,8 @@ export const syncPriceJSON = async (args) => {
 
   try {
     const stripePrice = await stripe.prices.retrieve(default_price);
+
+    console.log("stripePrice", stripePrice);
 
     await payload.update({
       collection: "products",

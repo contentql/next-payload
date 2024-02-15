@@ -32,7 +32,7 @@ const Products: CollectionConfig = {
       },
       fields: [
         {
-          name: "stripePriceID",
+          name: "id",
           label: "Stripe Price ID",
           type: "text",
           // admin: {

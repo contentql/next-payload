@@ -55,21 +55,6 @@ export default buildConfig({
       logs: true,
       sync: [
         {
-          collection: "customers",
-          stripeResourceType: "customers",
-          stripeResourceTypeSingular: "customer",
-          fields: [
-            {
-              fieldPath: "name",
-              stripeProperty: "name",
-            },
-            {
-              fieldPath: "email",
-              stripeProperty: "email",
-            },
-          ],
-        },
-        {
           collection: "products",
           stripeResourceType: "products",
           stripeResourceTypeSingular: "product",
@@ -84,6 +69,21 @@ export default buildConfig({
             },
           ],
         },
+        // {
+        //   collection: "items",
+        //   stripeResourceType: "items",
+        //   stripeResourceTypeSingular: "item",
+        //   fields: [
+        //     {
+        //       fieldPath: "name",
+        //       stripeProperty: "name",
+        //     },
+        //     {
+        //       fieldPath: "price",
+        //       stripeProperty: "default_price",
+        //     },
+        //   ],
+        // },
       ],
       rest: false,
       webhooks: {
@@ -92,6 +92,8 @@ export default buildConfig({
         "customer.subscription.deleted": subscriptionDeleted,
         "product.created": syncPriceJSON,
         "product.updated": syncPriceJSON,
+        // "item.created": syncPriceJSON,
+        // "item.updated": syncPriceJSON,
       },
       stripeWebhooksEndpointSecret: process.env.STRIPE_WEBHOOKS_ENDPOINT_SECRET,
     }),
