@@ -1,7 +1,8 @@
 import { StripeConfig } from '@payloadcms/plugin-stripe/dist/types';
 import { subscriptionCreatedOrUpdated } from '../webhooks/subscriptionCreatedOrUpdated';
 import { subscriptionDeleted } from '../webhooks/subscriptionDeleted';
-import { syncPriceJSON } from '../webhooks/syncPriceJSON';
+import { syncPriceJSONCreated } from '../webhooks/syncPriceJSONCreated';
+import { syncPriceJSONUpdated } from '../webhooks/syncPriceJSONUpdated';
 
 export const stripePluginConfig: StripeConfig = {
   stripeSecretKey: process.env.STRIPE_SECRET_KEY,
@@ -44,8 +45,8 @@ export const stripePluginConfig: StripeConfig = {
     'customer.subscription.created': subscriptionCreatedOrUpdated,
     'customer.subscription.updated': subscriptionCreatedOrUpdated,
     'customer.subscription.deleted': subscriptionDeleted,
-    'product.created': syncPriceJSON,
-    'product.updated': syncPriceJSON,
+    'product.created': syncPriceJSONCreated,
+    'product.updated': syncPriceJSONUpdated,
   },
   stripeWebhooksEndpointSecret: process.env.STRIPE_WEBHOOKS_ENDPOINT_SECRET,
 };

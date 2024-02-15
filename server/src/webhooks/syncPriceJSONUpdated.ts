@@ -1,4 +1,4 @@
-export const syncPriceJSON = async (args) => {
+export const syncPriceJSONUpdated = async (args) => {
   const { event, payload, stripe } = args;
 
   const customerStripeID = event.data.object.customer;
@@ -50,7 +50,7 @@ export const syncPriceJSON = async (args) => {
           stripeJSON: JSON.stringify(stripePrice),
         },
         amount: stripePrice.unit_amount / 100,
-        skipSync: true,
+        skipSync: false,
       },
     });
 
