@@ -6,8 +6,10 @@ import { useRouter } from 'next/navigation'
 import IntegrationsView from './IntegrationsView'
 import OverviewView from './OverviewView'
 
-const ProjectView = () => {
+const ProjectView = ({ params }: { params: any }) => {
   const router = useRouter()
+
+  console.log(params)
 
   return (
     <DashboardShell className='min-h-screen'>
@@ -23,7 +25,7 @@ const ProjectView = () => {
           </TabsTrigger>
         </TabsList>
         <OverviewView />
-        <IntegrationsView />
+        <IntegrationsView params={params} />
       </Tabs>
     </DashboardShell>
   )
