@@ -7,10 +7,14 @@ import { cloudStorage } from '@payloadcms/plugin-cloud-storage';
 import { slateEditor } from '@payloadcms/richtext-slate';
 import { buildConfig } from 'payload/config';
 
+import stripePlugin from '@payloadcms/plugin-stripe';
+import Customers from './collections/Customers';
 import { Media } from './collections/Media';
+import Products from './collections/Products';
 import Todos from './collections/Todos';
 import Users from './collections/Users';
 import { s3StorageAdapter } from './config/s3.config';
+import { stripePluginConfig } from './config/stripe.config';
 
 export default buildConfig({
   admin: {
@@ -28,7 +32,7 @@ export default buildConfig({
     },
   },
   editor: slateEditor({}),
-  collections: [Users, Todos, Media],
+  collections: [Users, Todos, Media, Customers, Products],
   upload: {
     useTempFiles: true,
   },
@@ -47,6 +51,7 @@ export default buildConfig({
         },
       },
     }),
+    stripePlugin(stripePluginConfig),
   ],
   db: mongooseAdapter({
     url: process.env.DATABASE_URI,
