@@ -1,4 +1,4 @@
-import http from '@/lib/axios'
+import { http } from '@/lib/axios'
 import { User } from '@/types/payload-types'
 
 export const login = async (data: User) => {
