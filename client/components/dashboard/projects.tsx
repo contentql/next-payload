@@ -1,22 +1,23 @@
+'use client'
+import { keys } from '@/apis/query-keys'
+import { getAllProjectDetails } from '@/apis/railway/projects/getAllProjects'
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { useQuery } from '@tanstack/react-query'
 import { Icons } from '../icons'
 import ProjectCard from './project-card'
 
 const Projects = (props: { setShowCreateAlert: Function }) => {
   const { setShowCreateAlert } = props
 
-  const projects = [
-    {
-      id: '1d4ee742-bc9a-40bb-8bc7-b84e77629c0f',
-      name: 'Our Saas',
-      description: 'this is a saas project',
-    },
-  ]
+  const { data: projects, isPending: isProjectsPending } = useQuery({
+    queryKey: keys('/api/projects', 'get').main(),
+    queryFn: getAllProjectDetails,
+  })
 
   return (
     <div className='flex min-h-screen w-full flex-col'>
@@ -33,9 +34,17 @@ const Projects = (props: { setShowCreateAlert: Function }) => {
               </div>
             </CardHeader>
           </Card>
-          {projects.map(project => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
+          {projects?.map(
+            (project: {
+              id: string
+              node: {
+                id: string
+                name: string
+                description: string
+                updatedAt: Date
+              }
+            }) => <ProjectCard key={project.node.id} project={project.node} />,
+          )}
         </div>
       </main>
     </div>

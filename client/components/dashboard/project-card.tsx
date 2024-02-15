@@ -5,17 +5,16 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import formatTimeAgo from '@/utils/FormateDate'
 import { useRouter } from 'next/navigation'
-
 const ProjectCard = ({
   project,
 }: {
-  project: { id: string; name: string; description: string }
+  project: { id: string; name: string; description: string; updatedAt: Date }
 }) => {
-  const { id, name, description } = project
+  const { id, name, description, updatedAt } = project
 
   const router = useRouter()
-
   return (
     <Card
       className='relative cursor-pointer transition-shadow duration-200 ease-in-out hover:shadow-lg'
@@ -27,7 +26,9 @@ const ProjectCard = ({
         </div>
       </CardHeader>
       <CardContent className='grid gap-2'>
-        <div className='text-sm font-semibold'>Last update: 3 hours ago</div>
+        <div className='text-end text-sm font-semibold'>
+          Last update: {formatTimeAgo(updatedAt)}
+        </div>
         <div className='absolute right-2 top-2 flex h-3 w-3 items-center justify-center rounded-full bg-green-500 transition-colors hover:bg-green-600'></div>
       </CardContent>
     </Card>
