@@ -1,42 +1,29 @@
-# Payload Blank Template
+## Payload CMS Integration with Stripe
 
-A blank template for [Payload](https://github.com/payloadcms/payload) to help you get up and running quickly. This repo may have been created by running `npx create-payload-app@latest` and selecting the "blank" template or by cloning this template on [Payload Cloud](https://payloadcms.com/new/clone/blank).
+This repository contains code for integrating Payload CMS with Stripe, enabling management of products, prices, and subscriptions seamlessly. Below is an overview along with two approaches for adding default prices to products using webhooks and normal hooks after change.
 
-See the official [Examples Directory](https://github.com/payloadcms/payload/tree/main/examples) for details on how to use Payload in a variety of different ways.
+### Features
 
-## Development
+- **Stripe Integration:** Integration with Stripe for managing product pricing and subscriptions.
 
-To spin up the project locally, follow these steps:
+### Stripe Webhooks Setup
 
-1. First clone the repo
-1. Then `cd YOUR_PROJECT_REPO && cp .env.example .env`
-1. Next `yarn && yarn dev` (or `docker-compose up`, see [Docker](#docker))
-1. Now `open http://localhost:3000/admin` to access the admin panel
-1. Create your first admin user using the form on the page
+To enable Stripe webhooks for your local development environment, run the following command:
 
-That's it! Changes made in `./src` will be reflected in your app.
+```bash
+npm run stripe:webhooks
+```
 
-### Docker
+This command sets up a webhook listener that forwards events to `localhost:4000/stripe/webhooks`. Make sure your local server is running while using this command.
 
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this project locally. To do so, follow these steps:
+### Synchronization Approaches
 
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
+#### 1. Webhooks Approach
 
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
+- **Description:** Utilizes Stripe webhooks to listen for events such as price creation or update in Stripe. When a price is created or updated, a webhook event triggers a function to sync the price JSON to the Payload CMS.
+- **Implementation:** The `syncPriceJSONCreated` and `syncPriceJSONUpdated` functions handle the synchronization of price information between Stripe and Payload CMS.
 
-## Production
+#### 2. Normal Hook After Change Approach
 
-To run Payload in production, you need to build and serve the Admin panel. To do so, follow these steps:
-
-1. First invoke the `payload build` script by running `yarn build` or `npm run build` in your project root. This creates a `./build` directory with a production-ready admin bundle.
-1. Then run `yarn serve` or `npm run serve` to run Node in production and serve Payload from the `./build` directory.
-
-### Deployment
-
-The easiest way to deploy your project is to use [Payload Cloud](https://payloadcms.com/new/import), a one-click hosting solution to deploy production-ready instances of your Payload apps directly from your GitHub repo. You can also deploy your app manually, check out the [deployment documentation](https://payloadcms.com/docs/production/deployment) for full details.
-
-## Questions
-
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+- **Description:** Uses normal hooks after change in Payload CMS to trigger a function to add the default price when a new product is created or updated.
+- **Implementation:** The `addPrice` function, executed as a collection hook after change, automatically adds a default price to a product in Stripe when a new product is created in the Payload CMS.
