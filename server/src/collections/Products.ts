@@ -1,8 +1,11 @@
 import { CollectionConfig } from "payload/types";
-import { ProductSelect } from "../ui/ProductSelect";
+import { syncWithStripe } from "../hooks/syncWithStripe";
 
 const Products: CollectionConfig = {
   slug: "products",
+  hooks: {
+    beforeChange: [syncWithStripe],
+  },
   timestamps: true,
   admin: {
     defaultColumns: ["name"],
@@ -16,9 +19,14 @@ const Products: CollectionConfig = {
     {
       name: "price",
       label: "Price",
+      type: "text",
+    },
+    {
+      name: "priceId",
+      label: "Price",
       type: "group",
       admin: {
-        // readOnly: true,
+        readOnly: true,
         description:
           "All pricing information is managed in Stripe and will be reflected here.",
       },

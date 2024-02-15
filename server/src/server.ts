@@ -1,8 +1,8 @@
-import express from 'express';
-import payload from 'payload';
-import { email } from './config/email-config';
+import express from "express";
+import payload from "payload";
+import { email } from "./config/email-config";
 
-require('dotenv').config();
+require("dotenv").config();
 const app = express();
 
 // app.use(function (req, res, next) {
@@ -21,8 +21,8 @@ const app = express();
 // });
 
 // Redirect root to Admin panel
-app.get('/', (_, res) => {
-  res.redirect('/admin');
+app.get("/", (_, res) => {
+  res.redirect("/admin");
 });
 
 const start = async () => {

@@ -10,17 +10,37 @@ import stripePlugin from "@payloadcms/plugin-stripe";
 import Users from "./collections/Users";
 import Todos from "./collections/Todos";
 import Products from "./collections/Products";
+import Items from "./collections/Items";
 import { subscriptionCreatedOrUpdated } from "./webhooks/subscriptionCreatedOrUpdated";
 import { subscriptionDeleted } from "./webhooks/subscriptionDeleted";
 import { syncPriceJSON } from "./webhooks/syncPriceJSON";
+
+// const mockModulePath = path.resolve(__dirname, "mocks/module.js");
+// const fullFilePath = path.resolve(__dirname, "hooks/createProductInStripe");
 
 export default buildConfig({
   admin: {
     user: Users.slug,
     bundler: webpackBundler(),
+    // webpack: (config) => {
+    //   config.module.rules.push({
+    //     test: /\bcanvas\.node\b/,
+    //     use: "raw-loader",
+    //   });
+    //   return {
+    //     ...config,
+    //     resolve: {
+    //       ...config.resolve,
+    //       alias: {
+    //         ...config.resolve.alias,
+    //         [fullFilePath]: mockModulePath,
+    //       },
+    //     },
+    //   };
+    // },
   },
   editor: slateEditor({}),
-  collections: [Users, Todos, Products],
+  collections: [Users, Todos, Products, Items],
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
   },
@@ -47,13 +67,6 @@ export default buildConfig({
               fieldPath: "email",
               stripeProperty: "email",
             },
-            // NOTE: nested fields are not supported yet, because the Stripe API keeps everything separate at the top-level
-            // because of this, we need to wire our own custom webhooks to handle these changes
-            // In the future, support for nested fields may look something like this:
-            // {
-            //   field: 'subscriptions.name',
-            //   property: 'plan.name',
-            // }
           ],
         },
         {
