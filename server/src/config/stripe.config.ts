@@ -21,13 +21,6 @@ export const stripePluginConfig: StripeConfig = {
           fieldPath: 'email',
           stripeProperty: 'email',
         },
-        // NOTE: nested fields are not supported yet, because the Stripe API keeps everything separate at the top-level
-        // because of this, we need to wire our own custom webhooks to handle these changes
-        // In the future, support for nested fields may look something like this:
-        // {
-        //   field: 'subscriptions.name',
-        //   property: 'plan.name',
-        // }
       ],
     },
     {

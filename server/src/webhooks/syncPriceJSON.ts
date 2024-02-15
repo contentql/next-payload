@@ -49,6 +49,7 @@ export const syncPriceJSON = async (args) => {
         price: {
           stripeJSON: JSON.stringify(stripePrice),
         },
+        amount: stripePrice.unit_amount / 100,
         skipSync: true,
       },
     });

@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload/types';
+import { addPrice } from '../hooks/addPrice';
 
 const Products: CollectionConfig = {
   slug: 'products',
@@ -6,11 +7,22 @@ const Products: CollectionConfig = {
   admin: {
     defaultColumns: ['name'],
   },
+  hooks: {
+    afterChange: [addPrice],
+  },
   fields: [
     {
       name: 'name',
       label: 'Name',
       type: 'text',
+    },
+    {
+      name: 'amount',
+      label: 'Amount',
+      admin: {
+        description: 'Enter your amount in inr',
+      },
+      type: 'number',
     },
     {
       name: 'price',
