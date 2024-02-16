@@ -10,7 +10,7 @@ const ProjectView = () => {
   const router = useRouter()
 
   return (
-    <DashboardShell className='min-h-screen'>
+    <DashboardShell className=''>
       <Tabs defaultValue='overview' className='space-y-4'>
         <TabsList>
           <TabsTrigger value='' onClick={() => router.push('/dashboard')}>

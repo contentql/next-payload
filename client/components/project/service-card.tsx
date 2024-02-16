@@ -8,6 +8,7 @@ import {
 import formatTimeAgo from '@/utils/FormateDate'
 import Image from 'next/image'
 import { Icons } from '../icons'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 const ServiceCard = ({
   service,
@@ -37,10 +38,28 @@ const ServiceCard = ({
     DEPLOYING: 'bg-orange-500  hover:bg-orange-600',
     CRASHED: 'bg-red-800  hover:bg-red-900',
   }
+
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const { replace } = useRouter()
+
+  const handleClick = (serviceId: string) => {
+    const params = new URLSearchParams(searchParams)
+
+    if (serviceId) {
+      params.set('service', serviceId)
+    }
+
+    replace(`${pathname}?${params.toString()}`)
+  }
+
+  const router = useRouter()
   const { id, name, description, updatedAt, icon, deployments } = service
   const DEPLOYMENT = deployments?.edges[0]?.node
   return (
-    <Card className='relative cursor-pointer transition-shadow duration-200 ease-in-out hover:shadow-lg'>
+    <Card
+      className='relative cursor-pointer transition-shadow duration-200 ease-in-out hover:shadow-lg'
+      onClick={() => handleClick(id)}>
       <CardHeader className='flex flex-row items-center gap-4'>
         {icon !== null ? (
           <Image src={icon} alt='icon' width={28} height={28} />
