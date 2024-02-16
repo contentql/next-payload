@@ -23,14 +23,14 @@ const DashboardView = () => {
   const [input, setInput] = React.useState('')
   const [showCreateAlert, setShowCreateAlert] = React.useState(false)
 
-  const { data: projectIds, isPending } = useQuery({
+  const { data: userProjects, isPending } = useQuery({
     queryKey: keys('/api/projects', 'get').main(),
     queryFn: getAllProjects,
   })
 
   const projects = useQueries({
-    queries: projectIds
-      ? projectIds.map((project: { project_id: string }) => ({
+    queries: userProjects
+      ? userProjects.map((project: { project_id: string }) => ({
           queryKey: keys('/graphql', 'post').detail([project.project_id]),
           queryFn: () => getProject(project.project_id),
         }))
