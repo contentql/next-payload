@@ -1,4 +1,4 @@
-import { railway } from '@/lib/axios'
+import { railwayAdmin } from '@/lib/railway'
 
 export const getServices = `
  query getServices($id:String!) {
@@ -22,11 +22,7 @@ export const getServices = `
 `
 
 export const getServicesById = async (id: string) => {
-  try {
-    const response = await railway(getServices, { id })
-    return response.data?.data?.railway?.project?.services?.edges
-  } catch (error) {
-    console.error('Error fetching data:', error)
-    throw error
-  }
+  const response = await railwayAdmin(getServices, { id })
+
+  return response.data?.railway?.project?.services?.edges
 }

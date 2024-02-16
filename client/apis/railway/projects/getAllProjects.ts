@@ -1,28 +1,22 @@
-import { railway } from '@/lib/axios'
+import { railwayAdmin } from '@/lib/railway'
 
-export const allProjects = `
- query allProjects {
-  railway {
-    projects {
-      edges {
-        node {    
-          id
-          name
-          description
-          updatedAt
+export const getAllProjectDetails = async () => {
+  const query = `query allProjects {
+    railway {
+      projects {
+        edges {
+          node {    
+            id
+            name
+            description
+            updatedAt
+          }
         }
       }
     }
-  }
-}
-`
+  }`
 
-export const getAllProjectDetails = async () => {
-  try {
-    const response = await railway(allProjects)
-    return response.data?.data?.railway?.projects?.edges
-  } catch (error) {
-    console.error('Error fetching data:', error)
-    throw error
-  }
+  const data = await railwayAdmin(query)
+
+  return data?.data?.railway?.projects?.edges
 }
