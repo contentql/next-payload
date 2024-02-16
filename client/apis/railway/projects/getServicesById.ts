@@ -22,11 +22,7 @@ export const getServices = `
 `
 
 export const getServicesById = async (id: string) => {
-  try {
-    const response = await railwayAdmin(getServices, { id })
-    return response.data?.railway?.project?.services?.edges
-  } catch (error) {
-    console.error('Error fetching data:', error)
-    throw error
-  }
+  const response = await railwayAdmin(getServices, { id })
+
+  return response.data?.railway?.project?.services?.edges
 }

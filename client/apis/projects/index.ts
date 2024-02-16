@@ -1,0 +1,1 @@
+export { getAllProjects } from './queries'
