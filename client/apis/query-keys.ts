@@ -8,6 +8,7 @@ export const keys = (
     list: (filters: string) =>
       [...keys(url, type).lists(), { filters }] as const,
     details: () => [...keys(url, type).main(), 'detail'] as const, // invalidate
-    detail: (id: string) => [...keys(url, type).details(), id] as const,
-  };
-};
+    detail: ([...id]: string[]) =>
+      [...keys(url, type).details(), [...id]] as const,
+  }
+}

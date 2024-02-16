@@ -11,6 +11,7 @@ import stripePlugin from '@payloadcms/plugin-stripe';
 import Customers from './collections/Customers';
 import { Media } from './collections/Media';
 import Products from './collections/Products';
+import Projects from './collections/Projects';
 import Todos from './collections/Todos';
 import Users from './collections/Users';
 import { s3StorageAdapter } from './config/s3.config';
@@ -32,7 +33,7 @@ export default buildConfig({
     },
   },
   editor: slateEditor({}),
-  collections: [Users, Todos, Media, Customers, Products],
+  collections: [Users, Todos, Media, Customers, Products, Projects],
   upload: {
     useTempFiles: true,
   },
