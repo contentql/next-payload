@@ -3,16 +3,37 @@ import { getServicesById } from '@/apis/railway/projects/getServicesById'
 import ServiceCard from '@/components/project/service-card'
 import { TabsContent } from '@/components/ui/tabs'
 import { useQuery } from '@tanstack/react-query'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 const OverviewView = () => {
   const pathName = usePathname()
   const projectId = pathName.split('/').at(-1)?.toString()
 
-  const { data: services, isPending: isServicesPending } = useQuery({
-    queryKey: keys('/api/project/services', 'get').main(),
+  const {
+    data: services,
+    isPending: isServicesPending,
+    isFetching: isServicesFetching,
+    isLoading: isServicesLoading,
+  } = useQuery({
+    queryKey: keys('/api/project/services', 'get').detail(projectId!),
     queryFn: () => getServicesById(projectId!),
   })
 
+  if (isServicesPending) {
+    return (
+      <div className='flex h-[400px] items-center justify-center'>
+        <div className=' animate-ping rounded-full'>
+          <Image
+            src='/images/ContentQL.png'
+            alt='loading'
+            width={60}
+            height={60}
+          />
+        </div>
+      </div>
+    )
+  }
+  console.log('services', services)
   return (
     <TabsContent value='overview'>
       <div className='flex min-h-screen w-full flex-col'>
@@ -26,6 +47,17 @@ const OverviewView = () => {
                   name: string
                   description: string
                   updatedAt: Date
+                  icon: string
+                  deployments: {
+                    edges: [
+                      {
+                        node: {
+                          status: string
+                          updatedAt: Date
+                        }
+                      },
+                    ]
+                  }
                 }
               }) => (
                 <ServiceCard key={service?.node.id} service={service.node} />
