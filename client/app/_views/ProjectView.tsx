@@ -9,8 +9,6 @@ import OverviewView from './OverviewView'
 const ProjectView = ({ params }: { params: any }) => {
   const router = useRouter()
 
-  console.log(params)
-
   return (
     <DashboardShell className='min-h-screen'>
       <Tabs defaultValue='overview' className='space-y-4'>
@@ -24,7 +22,7 @@ const ProjectView = ({ params }: { params: any }) => {
             Observability
           </TabsTrigger>
         </TabsList>
-        <OverviewView />
+        <OverviewView params={params} />
         <IntegrationsView params={params} />
       </Tabs>
     </DashboardShell>

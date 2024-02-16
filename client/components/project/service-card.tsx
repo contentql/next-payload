@@ -6,16 +6,23 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { useRouter } from 'next/navigation'
 
 const ServiceCard = ({
   service,
+  params,
 }: {
   service: { id: string; name: string; description: string }
+  params: any
 }) => {
   const { id, name, description } = service
 
+  const router = useRouter()
+
   return (
-    <Card className='relative cursor-pointer transition-shadow duration-200 ease-in-out hover:shadow-lg'>
+    <Card
+      className='relative cursor-pointer transition-shadow duration-200 ease-in-out hover:shadow-lg'
+      onClick={() => router.push(`/project/${params.projectId}/service/${id}`)}>
       <CardHeader className='flex flex-row items-center gap-4'>
         <Icons.project className='h-8 w-8' />
         <div className='grid gap-1'>

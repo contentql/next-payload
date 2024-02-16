@@ -1,24 +1,20 @@
 import React from 'react'
-import ServiceDetails from '@/components/project/service-details-card'
-import ProjectView from '@/app/_views/ProjectView'
 
 const services = [
   { id: '1', name: 'Storage', description: 'cloudflare R2' },
   { id: '2', name: 'Payments', description: 'stripe subscription' },
   { id: '3', name: 'Emails', description: 'sendgrid email system' },
+  { id: '6', name: 'Frontend', description: 'nextjs application' },
+  { id: '7', name: 'Backend', description: 'payload cms' },
+  { id: '8', name: 'Database', description: 'mongodb' },
 ]
 
 const ServicePage = ({ params }: { params: any }) => {
-  const { serviceId, projectId } = params
+  const service = services.find(s => s.id === params.serviceId)
 
   return (
     <div className='service-page'>
-      <ProjectView params={params} />
-      <ServiceDetails
-        serviceId={serviceId}
-        services={services}
-        projectId={projectId}
-      />
+      <p className='m-6'>service : {service?.description}</p>
     </div>
   )
 }

@@ -42,6 +42,11 @@ const ServiceDetails = ({
           <Link className='mt-8' href={`/project/${projectId}`}>
             <Icons.close className='h-6 w-6' />
           </Link>
+          <Link
+            className='mt-8'
+            href={`/project/${projectId}/service/${service?.id}/testpage`}>
+            <Icons.close className='h-6 w-6' />
+          </Link>
         </div>
 
         <div className='w-full border border-slate-200'></div>
