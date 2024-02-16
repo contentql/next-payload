@@ -3,6 +3,7 @@ import { getServicesById } from '@/apis/railway/projects/getServicesById'
 import ServiceCard from '@/components/project/service-card'
 import { TabsContent } from '@/components/ui/tabs'
 import { useQuery } from '@tanstack/react-query'
+import Image from 'next/image'
 import { useParams } from 'next/navigation'
 
 interface Service {
@@ -12,6 +13,17 @@ interface Service {
     name: string
     description: string
     updatedAt: Date
+    icon: string
+    deployments: {
+      edges: [
+        {
+          node: {
+            status: string
+            updatedAt: Date
+          }
+        },
+      ]
+    }
   }
 }
 
@@ -25,6 +37,21 @@ const OverviewView = () => {
     queryFn: () => getServicesById(projectId),
   })
 
+  if (isServicesPending) {
+    return (
+      <div className='flex h-[400px] items-center justify-center'>
+        <div className=' animate-ping rounded-full'>
+          <Image
+            src='/images/ContentQL.png'
+            alt='loading'
+            width={60}
+            height={60}
+          />
+        </div>
+      </div>
+    )
+  }
+  console.log('services', services)
   return (
     <TabsContent value='overview'>
       <div className='flex min-h-screen w-full flex-col'>

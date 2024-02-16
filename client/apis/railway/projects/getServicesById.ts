@@ -3,15 +3,25 @@ import { railwayAdmin } from '@/lib/railway'
 export const getServices = `
  query getServices($id:String!) {
   railway {
-    project(id: $id) {
+    project(id: $id){
+      description
       id
       name
       services {
         edges {
           node {
-            id
+            icon
             name
+            id
             updatedAt
+            deployments {
+              edges {
+                node {
+                  status
+                  updatedAt
+                }
+              }
+            }
           }
         }
       }
