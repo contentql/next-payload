@@ -1,6 +1,6 @@
-import { railway } from '@/lib/axios'
+import { railwayAdmin } from '@/lib/railway'
 
-export const allProjects = `
+const query = `
  query allProjects {
   railway {
     projects {
@@ -19,8 +19,9 @@ export const allProjects = `
 
 export const getAllProjectDetails = async () => {
   try {
-    const response = await railway(allProjects)
-    return response.data?.data?.railway?.projects?.edges
+    const response = await railwayAdmin(query)
+
+    return response.data?.railway?.projects?.edges
   } catch (error) {
     console.error('Error fetching data:', error)
     throw error
