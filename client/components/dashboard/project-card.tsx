@@ -7,6 +7,11 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 import { Project, UserProject } from '@/types/project-types'
 import { deploymentStatus } from '@/utils/deploymentStatusColor'
@@ -27,7 +32,7 @@ const ProjectCard = ({ userProject }: { userProject: UserProject }) => {
 
   const failedDeploymentsCount = project?.services.edges.filter(
     service =>
-      service.node.deployments.edges[0].node.status.toUpperCase() === 'FAILED',
+      service?.node.deployments.edges[0].node.status.toUpperCase() === 'FAILED',
   ).length
 
   return (
@@ -44,13 +49,29 @@ const ProjectCard = ({ userProject }: { userProject: UserProject }) => {
         <div className=' text-sm font-semibold text-muted-foreground'>
           {servicesCount} {servicesCount! === 1 ? 'Service' : 'Services'}
         </div>
-        <div
-          className={cn(
-            'absolute right-2 top-2 flex h-3 w-3 items-center justify-center rounded-full',
-            failedDeploymentsCount
-              ? deploymentStatus.FAILED
-              : deploymentStatus.SUCCESS,
-          )}></div>
+        <div className='flex items-center justify-center'>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div
+                className={cn(
+                  'absolute right-2 top-2 flex h-3 w-3 items-center justify-center rounded-full',
+                  failedDeploymentsCount
+                    ? deploymentStatus.FAILED
+                    : deploymentStatus.SUCCESS,
+                )}
+              />
+            </TooltipTrigger>
+            <TooltipContent
+              align='center'
+              className='rounded-md bg-gray-900 p-2 text-white'
+              side='top'>
+              <p>
+                {failedDeploymentsCount ? 'Deployment Issues' : 'No Issues'}
+              </p>
+              <div className='fill-current text-gray-900' />
+            </TooltipContent>
+          </Tooltip>
+        </div>
       </CardContent>
     </Card>
   )

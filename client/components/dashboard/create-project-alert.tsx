@@ -1,3 +1,6 @@
+import { addProject } from '@/apis/projects/mutations'
+import { keys } from '@/apis/query-keys'
+import { createProject } from '@/apis/railway/projects/createProject'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,7 +13,9 @@ import {
 } from '@/components/ui/alert-dialog'
 import { buttonVariants } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { toast } from '@/components/ui/use-toast'
 import { cn } from '@/lib/utils'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import React from 'react'
 import { Icons } from '../icons'
 
@@ -23,6 +28,70 @@ const CreateProjectAlert = (props: {
   const { showCreateAlert, setShowCreateAlert, input, setInput } = props
 
   const [isCreateLoading, setIsCreateLoading] = React.useState<boolean>(false)
+
+  const queryClient = useQueryClient()
+
+  const {
+    isPending: isAddProjectPending,
+    variables: addProjectVariables,
+    isSuccess: addProjectSuccess,
+    mutate: addProjectMutation,
+  } = useMutation({
+    mutationKey: keys('/api/projects', 'post').detail([input]),
+    mutationFn: (project: { project_id: string }) => addProject(project),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: keys('/api/projects', 'get').main(),
+      })
+      toast({
+        title: 'Project Created Successfully',
+        description:
+          'The project has been successfully created and added to the database.',
+        variant: 'default',
+      })
+    },
+    onError: async () => {
+      toast({
+        title: 'Something went wrong.',
+        description: 'Project Id is not added to database.',
+        variant: 'destructive',
+      })
+    },
+    onSettled: async () => {
+      setInput('')
+      setIsCreateLoading(false)
+      setShowCreateAlert(false)
+    },
+  })
+
+  const {
+    isPending: isCreateProjectPending,
+    variables: createProjectVariables,
+    isSuccess: createProjectSuccess,
+    mutate: createProjectMutation,
+  } = useMutation({
+    mutationKey: keys('/graphql', 'post').detail(['projectCreate']),
+    mutationFn: (projectName: string) => createProject(projectName),
+    onSuccess: async data => {
+      addProjectMutation({ project_id: data.id })
+    },
+    onError: async () => {
+      setInput('')
+      setIsCreateLoading(false)
+      setShowCreateAlert(false)
+      toast({
+        title: 'Something went wrong.',
+        description: 'Project was not created. Please try again.',
+        variant: 'destructive',
+      })
+    },
+  })
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsCreateLoading(true)
+    createProjectMutation(input)
+  }
 
   return (
     <AlertDialog
@@ -54,10 +123,7 @@ const CreateProjectAlert = (props: {
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
-            onClick={async event => {
-              event.preventDefault()
-              setIsCreateLoading(true)
-            }}
+            onClick={handleSubmit}
             className={cn(buttonVariants({ variant: 'default' }), {
               'cursor-not-allowed opacity-60': isCreateLoading,
             })}
