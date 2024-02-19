@@ -6,8 +6,8 @@ import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import { useParams, useSearchParams } from 'next/navigation'
 
-import { motion } from 'framer-motion'
 import ServiceSettingsCard from '@/components/project/service-settings-card'
+import { motion } from 'framer-motion'
 
 interface Service {
   id: string
@@ -57,7 +57,7 @@ const OverviewView = () => {
       </div>
     )
   }
-  console.log('services', services)
+
   return (
     <div className='relative '>
       {serviceId && (
