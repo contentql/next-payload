@@ -1,27 +1,28 @@
-import { Inter as FontSans } from 'next/font/google';
-import localFont from 'next/font/local';
+import { Inter as FontSans } from 'next/font/google'
+import localFont from 'next/font/local'
 
-import { TailwindIndicator } from '@/components/tailwind-indicator';
-import { ThemeProvider } from '@/components/theme-provider';
-import { Toaster } from '@/components/ui/toaster';
-import { siteConfig } from '@/config/site';
-import { cn } from '@/lib/utils';
-import TanStackProvider from '@/providers/TanStackProvider';
-import '@/styles/globals.css';
+import { TailwindIndicator } from '@/components/tailwind-indicator'
+import { ThemeProvider } from '@/components/theme-provider'
+import { Toaster } from '@/components/ui/toaster'
+import { TooltipProvider } from '@/components/ui/tooltip'
+import { siteConfig } from '@/config/site'
+import { cn } from '@/lib/utils'
+import TanStackProvider from '@/providers/TanStackProvider'
+import '@/styles/globals.css'
 
 const fontSans = FontSans({
   subsets: ['latin'],
   variable: '--font-sans',
-});
+})
 
 // Font files can be colocated inside of `pages`
 const fontHeading = localFont({
   src: '../assets/fonts/CalSans-SemiBold.woff2',
   variable: '--font-heading',
-});
+})
 
 interface RootLayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export const metadata = {
@@ -80,7 +81,7 @@ export const metadata = {
     apple: '/apple-touch-icon.png',
   },
   // manifest: `${siteConfig.url}/site.webmanifest`,
-};
+}
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
@@ -91,17 +92,18 @@ export default function RootLayout({ children }: RootLayoutProps) {
           'min-h-screen bg-background font-sans antialiased',
           fontSans.variable,
           fontHeading.variable,
-        )}
-      >
+        )}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <TanStackProvider>
-            {children}
-            {/* <Analytics /> */}
-            <Toaster />
-            <TailwindIndicator />
+            <TooltipProvider>
+              {children}
+              {/* <Analytics /> */}
+              <Toaster />
+              <TailwindIndicator />
+            </TooltipProvider>
           </TanStackProvider>
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import { railwayAdmin } from '@/lib/railway'
+import { railwayAdmin } from '@/utils/railway'
 
 export const getServices = `
  query getServices($id:String!) {
