@@ -1,3 +1,4 @@
+import ServiceDeploymentView from '@/app/_views/ServiceDeploymentView'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -7,19 +8,18 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Separator } from '@/components/ui/separator'
+
 import { useRouter, useSearchParams } from 'next/navigation'
 import { RxCross2 } from 'react-icons/rx'
 
-export default function ServiceSettingsCard() {
+export default function ServiceSettingsCard({
+  serviceId,
+}: {
+  serviceId: string
+}) {
   const searchParams = useSearchParams()
   const { replace } = useRouter()
 
@@ -30,9 +30,9 @@ export default function ServiceSettingsCard() {
   }
 
   return (
-    <Card className='relative w-[350px]'>
+    <Card className='relative w-[420px] md:h-[650px] md:w-[700px]'>
       <CardHeader>
-        <CardTitle>Create project</CardTitle>
+        <CardTitle>{serviceId}</CardTitle>
         <RxCross2
           className='absolute right-3 top-2 hover:cursor-pointer'
           onClick={removeQueryParam}
@@ -40,35 +40,26 @@ export default function ServiceSettingsCard() {
         <CardDescription>Deploy your new project in one-click.</CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
-          <div className='grid w-full items-center gap-4'>
-            <div className='flex flex-col space-y-1.5'>
-              <Label htmlFor='name'>Name</Label>
-              <Input id='name' placeholder='Name of your project' />
-            </div>
-            <div className='flex flex-col space-y-1.5'>
-              <Label htmlFor='framework'>Framework</Label>
-              <Select>
-                <SelectTrigger id='framework'>
-                  <SelectValue placeholder='Select' />
-                </SelectTrigger>
-                <SelectContent position='popper'>
-                  <SelectItem value='next'>Next.js</SelectItem>
-                  <SelectItem value='sveltekit'>SvelteKit</SelectItem>
-                  <SelectItem value='astro'>Astro</SelectItem>
-                  <SelectItem value='nuxt'>Nuxt.js</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        </form>
+        <Tabs defaultValue='account'>
+          <TabsList>
+            <TabsTrigger value='deployments'>Deployments</TabsTrigger>
+            <TabsTrigger value='variables'>variables</TabsTrigger>
+            <TabsTrigger value='metrics'>Metrics</TabsTrigger>
+            <TabsTrigger value='settings'>Settings</TabsTrigger>
+          </TabsList>
+
+          <Separator className='my-4' />
+
+          <TabsContent value='deployments'>
+            <ServiceDeploymentView />
+          </TabsContent>
+          <TabsContent value='variables'>
+            Change your variables here.
+          </TabsContent>
+          <TabsContent value='metrics'>Change your Metrics here.</TabsContent>
+          <TabsContent value='settings'>Change your Settings here.</TabsContent>
+        </Tabs>
       </CardContent>
-      <CardFooter className='flex justify-between'>
-        <Button variant='outline' onClick={removeQueryParam}>
-          Cancel
-        </Button>
-        <Button>Deploy</Button>
-      </CardFooter>
     </Card>
   )
 }

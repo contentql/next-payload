@@ -168,7 +168,7 @@ const OverviewView = () => {
             top: -8,
             bottom: 300,
           }}>
-          <ServiceSettingsCard />
+          <ServiceSettingsCard serviceId={serviceId} />
         </motion.div>
       )}
       <CreateServiceAlert
