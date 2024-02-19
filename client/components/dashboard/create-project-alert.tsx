@@ -1,4 +1,4 @@
-import { addProject } from '@/apis/projects/mutations'
+import { addProject } from '@/apis/projects'
 import { keys } from '@/apis/query-keys'
 import { createProject } from '@/apis/railway/projects/createProject'
 import {

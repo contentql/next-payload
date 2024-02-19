@@ -37,7 +37,7 @@ const ProjectCard = ({ userProject }: { userProject: UserProject }) => {
 
   return (
     <Card
-      className='relative cursor-pointer transition-shadow duration-200 ease-in-out hover:shadow-lg'
+      className='relative flex cursor-pointer flex-col justify-between transition-shadow duration-200 ease-in-out hover:shadow-lg'
       onClick={() => router.push(`/project/${project_id}`)}>
       <CardHeader className='flex flex-row items-center gap-4'>
         <div className='grid gap-1'>
