@@ -5,13 +5,15 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+
 import formatTimeAgo from '@/utils/FormateDate'
 import Image from 'next/image'
-import { Icons } from '../icons'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { Icons } from '../icons'
 
 const ServiceCard = ({
   service,
+  projectId,
 }: {
   service: {
     id: string
@@ -30,8 +32,9 @@ const ServiceCard = ({
       ]
     }
   }
+  projectId: string
 }) => {
-  const DeploymentStatus: { [key: string]: string } = {
+  const deploymentStatus: { [key: string]: string } = {
     SUCCESS: 'bg-green-500  hover:bg-green-600',
     FAILED: 'bg-red-500  hover:bg-red-600',
     BUILDING: 'bg-orange-500  hover:bg-orange-600',
@@ -56,6 +59,8 @@ const ServiceCard = ({
   const router = useRouter()
   const { id, name, description, updatedAt, icon, deployments } = service
   const DEPLOYMENT = deployments?.edges[0]?.node
+
+  console.log('project id', projectId)
   return (
     <Card
       className='relative cursor-pointer transition-shadow duration-200 ease-in-out hover:shadow-lg'
@@ -73,10 +78,13 @@ const ServiceCard = ({
       </CardHeader>
       <CardContent className='grid gap-2'>
         <div className='text-sm font-semibold'>
-          Last update: {formatTimeAgo(DEPLOYMENT.updatedAt)}
+          Last update:{' '}
+          {formatTimeAgo(DEPLOYMENT?.updatedAt) !== 'NaN seconds ago'
+            ? formatTimeAgo(DEPLOYMENT?.updatedAt)
+            : 'starting...'}
         </div>
         <div
-          className={`absolute right-2 top-2 flex h-3 w-3 items-center justify-center rounded-full transition-colors  ${DeploymentStatus[DEPLOYMENT.status]}`}></div>
+          className={`absolute right-2 top-2 flex h-3 w-3 items-center justify-center rounded-full transition-colors  ${deploymentStatus[DEPLOYMENT?.status]}`}></div>
       </CardContent>
     </Card>
   )
