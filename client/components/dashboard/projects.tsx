@@ -5,6 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { UserProject } from '@/types/project-types'
 import { Icons } from '../icons'
 import ProjectCard from './project-card'
 
@@ -16,10 +17,10 @@ interface Project {
 }
 
 const Projects = (props: {
-  projects: Project[]
+  userProjects: UserProject[]
   setShowCreateAlert: Function
 }) => {
-  const { projects, setShowCreateAlert } = props
+  const { userProjects, setShowCreateAlert } = props
 
   return (
     <div className='flex min-h-screen w-full flex-col'>
@@ -36,8 +37,8 @@ const Projects = (props: {
               </div>
             </CardHeader>
           </Card>
-          {projects?.map((project: Project) => (
-            <ProjectCard key={project.id} project={project} />
+          {userProjects?.map((userProject: UserProject) => (
+            <ProjectCard key={userProject.id} userProject={userProject} />
           ))}
         </div>
       </main>

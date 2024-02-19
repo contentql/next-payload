@@ -4,3 +4,8 @@ export interface Project {
   description: string
   updatedAt: Date
 }
+
+export interface UserProject {
+  id: string
+  project_id: string
+}
