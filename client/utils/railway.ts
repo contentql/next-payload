@@ -1,4 +1,4 @@
-import { graphql } from './axios'
+import { graphql } from '../lib/axios'
 
 export const railwayAdmin = async (
   query: string,
