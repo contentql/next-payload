@@ -256,13 +256,13 @@ const OverviewView = () => {
             </div>
           </ContextMenuTrigger>
           <ContextMenuContent>
-            <ContextMenuItem>Profile</ContextMenuItem>
-            <ContextMenuItem>Billing</ContextMenuItem>
-            <ContextMenuItem>Team</ContextMenuItem>
-            <ContextMenuItem
-              className='text-green-500'
-              onClick={() => setShowCreateAlert(true)}>
-              create service
+            <ContextMenuItem onClick={() => setShowCreateAlert(true)}>
+              <div className='flex space-x-6'>
+                <p>
+                  <Icons.add className='h-4 w-4' />
+                </p>
+                <p>Create Service</p>
+              </div>
             </ContextMenuItem>
           </ContextMenuContent>
         </ContextMenu>

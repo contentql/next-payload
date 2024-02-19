@@ -16,6 +16,7 @@ import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
 import { cn } from '@/lib/utils'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 import { Icons } from '../icons'
 
@@ -31,6 +32,8 @@ const CreateProjectAlert = (props: {
 
   const queryClient = useQueryClient()
 
+  const router = useRouter()
+
   const {
     isPending: isAddProjectPending,
     variables: addProjectVariables,
@@ -39,7 +42,8 @@ const CreateProjectAlert = (props: {
   } = useMutation({
     mutationKey: keys('/api/projects', 'post').detail([input]),
     mutationFn: (project: { project_id: string }) => addProject(project),
-    onSuccess: async () => {
+    onSuccess: async data => {
+      console.log('data: ', data)
       await queryClient.invalidateQueries({
         queryKey: keys('/api/projects', 'get').main(),
       })
@@ -49,6 +53,7 @@ const CreateProjectAlert = (props: {
           'The project has been successfully created and added to the database.',
         variant: 'default',
       })
+      router.push(`/project/${data?.project_id}`)
     },
     onError: async () => {
       toast({

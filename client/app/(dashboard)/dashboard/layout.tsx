@@ -1,5 +1,4 @@
 import { MainNav } from '@/components/main-nav'
-import { SiteFooter } from '@/components/site-footer'
 import { UserAccountNav } from '@/components/user-account-nav'
 
 interface DashboardLayoutProps {
@@ -20,7 +19,6 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           {children}
         </main>
       </div>
-      <SiteFooter className='border-t' />
     </div>
   )
 }
