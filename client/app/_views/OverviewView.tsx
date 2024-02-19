@@ -26,8 +26,6 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { useParams, useSearchParams } from 'next/navigation'
 import React from 'react'
-import ServiceSettingsCard from '@/components/project/service-settings-card'
-import { motion } from 'framer-motion'
 
 interface Service {
   id: string
