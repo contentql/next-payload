@@ -14,6 +14,7 @@ import { Separator } from '@/components/ui/separator'
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import { RxCross2 } from 'react-icons/rx'
+import ServiceVariablesView from '@/app/_views/ServiceVariablesView'
 
 export default function ServiceSettingsCard({
   serviceId,
@@ -54,7 +55,7 @@ export default function ServiceSettingsCard({
             <ServiceDeploymentView />
           </TabsContent>
           <TabsContent value='variables'>
-            Change your variables here.
+            <ServiceVariablesView />
           </TabsContent>
           <TabsContent value='metrics'>Change your Metrics here.</TabsContent>
           <TabsContent value='settings'>Change your Settings here.</TabsContent>
