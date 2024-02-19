@@ -9,15 +9,9 @@ import { DashboardHeader } from '@/components/header'
 import { Icons } from '@/components/icons'
 import { DashboardShell } from '@/components/shell'
 import { Button } from '@/components/ui/button'
+import { Project } from '@/types/project-types'
 import { useQueries, useQuery } from '@tanstack/react-query'
 import React from 'react'
-
-interface Project {
-  id: string
-  name: string
-  description: string
-  updatedAt: Date
-}
 
 const DashboardView = () => {
   const [input, setInput] = React.useState('')
