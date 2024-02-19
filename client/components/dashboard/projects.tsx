@@ -29,7 +29,7 @@ const Projects = (props: {
           <Card
             className='cursor-pointer transition-shadow duration-200 ease-in-out hover:shadow-lg'
             onClick={() => setShowCreateAlert(true)}>
-            <CardHeader className='flex flex-row items-center gap-4'>
+            <CardHeader className='flex h-full flex-row items-center justify-center gap-4'>
               <Icons.add className='h-8 w-8' />
               <div className='grid gap-1'>
                 <CardTitle>Add Project</CardTitle>

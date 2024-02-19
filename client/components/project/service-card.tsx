@@ -6,9 +6,10 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import formatTimeAgo from '@/utils/FormateDate'
+import { deploymentStatus } from '@/utils/deploymentStatusColor'
 import Image from 'next/image'
-import { Icons } from '../icons'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { Icons } from '../icons'
 
 const ServiceCard = ({
   service,
@@ -31,14 +32,6 @@ const ServiceCard = ({
     }
   }
 }) => {
-  const DeploymentStatus: { [key: string]: string } = {
-    SUCCESS: 'bg-green-500  hover:bg-green-600',
-    FAILED: 'bg-red-500  hover:bg-red-600',
-    BUILDING: 'bg-orange-500  hover:bg-orange-600',
-    DEPLOYING: 'bg-orange-500  hover:bg-orange-600',
-    CRASHED: 'bg-red-800  hover:bg-red-900',
-  }
-
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const { replace } = useRouter()
@@ -76,7 +69,7 @@ const ServiceCard = ({
           Last update: {formatTimeAgo(DEPLOYMENT.updatedAt)}
         </div>
         <div
-          className={`absolute right-2 top-2 flex h-3 w-3 items-center justify-center rounded-full transition-colors  ${DeploymentStatus[DEPLOYMENT.status]}`}></div>
+          className={`absolute right-2 top-2 flex h-3 w-3 items-center justify-center rounded-full transition-colors  ${deploymentStatus[DEPLOYMENT.status]}`}></div>
       </CardContent>
     </Card>
   )
