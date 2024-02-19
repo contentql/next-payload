@@ -135,7 +135,6 @@ const OverviewView = () => {
       })
     },
   })
-
   if (isServicesPending) {
     return (
       <div className='flex h-[400px] items-center justify-center'>
@@ -150,7 +149,12 @@ const OverviewView = () => {
       </div>
     )
   }
-  console.log('services', services)
+
+  if (isDeleteServicePending) {
+    return (
+      <div className='fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-gray-800 bg-opacity-50'></div>
+    )
+  }
   return (
     <div className='relative '>
       {serviceId && (
