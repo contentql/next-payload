@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -18,12 +16,27 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { RxCross2 } from 'react-icons/rx'
 
 export default function ServiceSettingsCard() {
+  const searchParams = useSearchParams()
+  const { replace } = useRouter()
+
+  const removeQueryParam = () => {
+    const params = new URLSearchParams(searchParams.toString())
+    params.delete('service')
+    replace(`?${params.toString()}`, undefined)
+  }
+
   return (
-    <Card className='w-[350px]'>
+    <Card className='relative w-[350px]'>
       <CardHeader>
         <CardTitle>Create project</CardTitle>
+        <RxCross2
+          className='absolute right-3 top-2 hover:cursor-pointer'
+          onClick={removeQueryParam}
+        />
         <CardDescription>Deploy your new project in one-click.</CardDescription>
       </CardHeader>
       <CardContent>
@@ -51,7 +64,9 @@ export default function ServiceSettingsCard() {
         </form>
       </CardContent>
       <CardFooter className='flex justify-between'>
-        <Button variant='outline'>Cancel</Button>
+        <Button variant='outline' onClick={removeQueryParam}>
+          Cancel
+        </Button>
         <Button>Deploy</Button>
       </CardFooter>
     </Card>
