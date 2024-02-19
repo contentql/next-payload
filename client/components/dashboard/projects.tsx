@@ -9,13 +9,6 @@ import { UserProject } from '@/types/project-types'
 import { Icons } from '../icons'
 import ProjectCard from './project-card'
 
-interface Project {
-  id: string
-  name: string
-  description: string
-  updatedAt: Date
-}
-
 const Projects = (props: {
   userProjects: UserProject[]
   setShowCreateAlert: Function

@@ -70,7 +70,7 @@ const CreateProjectAlert = (props: {
     isSuccess: createProjectSuccess,
     mutate: createProjectMutation,
   } = useMutation({
-    mutationKey: keys('/graphql', 'post').detail(['projectCreate']),
+    mutationKey: keys('/graphql', 'post').detail(['project_create', input]),
     mutationFn: (projectName: string) => createProject(projectName),
     onSuccess: async data => {
       addProjectMutation({ project_id: data.id })

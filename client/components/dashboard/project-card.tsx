@@ -8,6 +8,13 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuShortcut,
+  ContextMenuTrigger,
+} from '@/components/ui/context-menu'
+import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
@@ -17,9 +24,14 @@ import { Project, UserProject } from '@/types/project-types'
 import { deploymentStatus } from '@/utils/deploymentStatusColor'
 import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
+import React from 'react'
+import { Icons } from '../icons'
+import DeleteProjectAlert from './delete-project-alert'
 
 const ProjectCard = ({ userProject }: { userProject: UserProject }) => {
   const { project_id } = userProject
+
+  const [showDeleteAlert, setShowDeleteAlert] = React.useState(false)
 
   const router = useRouter()
 
@@ -28,17 +40,34 @@ const ProjectCard = ({ userProject }: { userProject: UserProject }) => {
     queryFn: () => getProject(project_id),
   })
 
-  const servicesCount = project?.services.edges.length
+  const servicesCount = project?.services?.edges?.length
 
-  const failedDeploymentsCount = project?.services.edges.filter(
+  const failedDeploymentsCount = project?.services?.edges?.filter(
     service =>
-      service?.node.deployments.edges[0].node.status.toUpperCase() === 'FAILED',
+      service?.node?.deployments?.edges[0]?.node?.status?.toUpperCase() ===
+      'FAILED',
   ).length
+
+  const handleDelete = (e: React.FormEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setShowDeleteAlert(true)
+  }
 
   return (
     <Card
       className='relative flex cursor-pointer flex-col justify-between transition-shadow duration-200 ease-in-out hover:shadow-lg'
       onClick={() => router.push(`/project/${project_id}`)}>
+      <ContextMenu>
+        <ContextMenuTrigger className='absolute right-0 top-0 h-full w-full' />
+        <ContextMenuContent className='w-64'>
+          <ContextMenuItem className='text-red-500' onClick={handleDelete}>
+            <Icons.trash className='mr-3 h-4 w-4' />
+            Delete
+            <ContextMenuShortcut>⌘X</ContextMenuShortcut>
+          </ContextMenuItem>
+        </ContextMenuContent>
+      </ContextMenu>
       <CardHeader className='flex flex-row items-center gap-4'>
         <div className='grid gap-1'>
           <CardTitle>{project?.name}</CardTitle>
@@ -73,6 +102,12 @@ const ProjectCard = ({ userProject }: { userProject: UserProject }) => {
           </Tooltip>
         </div>
       </CardContent>
+      <DeleteProjectAlert
+        showDeleteAlert={showDeleteAlert}
+        setShowDeleteAlert={setShowDeleteAlert}
+        projectId={project_id}
+        userProjectId={userProject.id}
+      />
     </Card>
   )
 }
