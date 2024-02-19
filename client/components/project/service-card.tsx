@@ -7,8 +7,8 @@ import {
 } from '@/components/ui/card'
 import formatTimeAgo from '@/utils/FormateDate'
 import Image from 'next/image'
-import { Icons } from '../icons'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { Icons } from '../icons'
 
 const ServiceCard = ({
   service,
@@ -43,7 +43,7 @@ const ServiceCard = ({
   const pathname = usePathname()
   const { replace } = useRouter()
 
-  const handleClick = (serviceId: string) => {
+  const addQueryParam = (serviceId: string) => {
     const params = new URLSearchParams(searchParams)
 
     if (serviceId) {
@@ -59,7 +59,7 @@ const ServiceCard = ({
   return (
     <Card
       className='relative cursor-pointer transition-shadow duration-200 ease-in-out hover:shadow-lg'
-      onClick={() => handleClick(id)}>
+      onClick={() => addQueryParam(id)}>
       <CardHeader className='flex flex-row items-center gap-4'>
         {icon !== null ? (
           <Image src={icon} alt='icon' width={28} height={28} />
