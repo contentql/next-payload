@@ -20,10 +20,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { Label } from '@/components/ui/label'
 
 const formSchema = z.object({
   variableName: z.string(),
@@ -43,7 +53,6 @@ const ServiceVariablesView = () => {
   const [variables, setVariables] = useState({})
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log('onSubmit', values)
     setVariables({ ...variables, [values.variableName]: values.value })
     setToggle(false)
   }
@@ -61,7 +70,47 @@ const ServiceVariablesView = () => {
           </div>
           <div className='flex gap-2'>
             <Button variant='ghost'>Shared Variable</Button>
-            <Button variant='ghost'>Raw Editor</Button>
+
+            <Dialog>
+              <DialogTrigger asChild>
+                {/* <Button variant='outline'>Edit Profile</Button> */}
+                <Button variant='ghost'>Raw Editor</Button>
+              </DialogTrigger>
+              <DialogContent className='sm:max-w-[425px]'>
+                <DialogHeader>
+                  <DialogTitle>Raw Editor</DialogTitle>
+                  <DialogDescription>
+                    Add, edit, or delete your project variables
+                  </DialogDescription>
+                </DialogHeader>
+                <div className='grid gap-4 py-4'>
+                  <div className='grid grid-cols-4 items-center gap-4'>
+                    <Label htmlFor='name' className='text-right'>
+                      Name
+                    </Label>
+                    <Input
+                      id='name'
+                      value='Pedro Duarte'
+                      className='col-span-3'
+                    />
+                  </div>
+                  <div className='grid grid-cols-4 items-center gap-4'>
+                    <Label htmlFor='username' className='text-right'>
+                      Username
+                    </Label>
+                    <Input
+                      id='username'
+                      value='@peduarte'
+                      className='col-span-3'
+                    />
+                  </div>
+                </div>
+                <DialogFooter>
+                  <Button type='submit'>Save changes</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+
             <Button variant='outline' onClick={() => createNewVariable()}>
               New variable
             </Button>

@@ -15,6 +15,7 @@ import { Separator } from '@/components/ui/separator'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { RxCross2 } from 'react-icons/rx'
 import ServiceVariablesView from '@/app/_views/ServiceVariablesView'
+import ServiceSettingsView from '@/app/_views/ServiceSettingsView'
 
 export default function ServiceSettingsCard({
   serviceId,
@@ -31,7 +32,7 @@ export default function ServiceSettingsCard({
   }
 
   return (
-    <Card className='relative w-[420px] md:h-[650px] md:w-[700px]'>
+    <Card className='relative w-[420px] overflow-auto p-2 md:h-[650px] md:w-[750px]'>
       <CardHeader>
         <CardTitle>{serviceId}</CardTitle>
         <RxCross2
@@ -41,7 +42,7 @@ export default function ServiceSettingsCard({
         <CardDescription>Deploy your new project in one-click.</CardDescription>
       </CardHeader>
       <CardContent>
-        <Tabs defaultValue='account'>
+        <Tabs defaultValue='deployments'>
           <TabsList>
             <TabsTrigger value='deployments'>Deployments</TabsTrigger>
             <TabsTrigger value='variables'>variables</TabsTrigger>
@@ -58,7 +59,9 @@ export default function ServiceSettingsCard({
             <ServiceVariablesView />
           </TabsContent>
           <TabsContent value='metrics'>Change your Metrics here.</TabsContent>
-          <TabsContent value='settings'>Change your Settings here.</TabsContent>
+          <TabsContent value='settings'>
+            <ServiceSettingsView />
+          </TabsContent>
         </Tabs>
       </CardContent>
     </Card>
